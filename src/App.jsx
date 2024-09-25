@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { BrowserRouter } from "react-router-dom";
-import { Certifications, Contact, Experience, Hero, Navbar, Portfolio} from "./components";
+import { Certifications, Contact, Experience, Hero, Navbar, Projects} from "./components";
 import Footer from "./components/Footer";
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
             <Hero scrollContainer={wrapperRef} />
           </div>
           <div id="projects" className='relative z-30 bg-[#1e241e] mt-[-2px]'>
-            <Portfolio />
+            <Projects />
           </div>
           <div id="certifications" className='relative z-30 bg-[#1e241e] mt-[-2px]'>
             <Certifications/>
