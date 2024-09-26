@@ -20,7 +20,7 @@ const App = () => {
           <div id="certifications" className='relative z-30 bg-[#101827] mt-[-2px]'>
             <Certifications/>
           </div>
-          <div id="experience" className='relative z-30 bg-[#101827]'>
+          <div id="experience" className='relative z-30 mt-[-2px] bg-[#101827]'>
             <Experience />
           </div>
           <div id="contact" className='relative z-30 bg-[#101827]'>

@@ -27,7 +27,7 @@ const Certs = () => {
           ))}
         </div>
       {visibleCerts.length < certs.length && (
-        <div className='text-center my-6'>
+        <div className='text-center my-8 max-lg:hidden'>
           <button 
             onClick={loadMoreCerts} 
             className='bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors duration-300 hover:shadow-lg'
