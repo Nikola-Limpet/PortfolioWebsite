@@ -81,5 +81,68 @@ const projects = [
   },
 ];
 
-export { experiences, projects };
+const certs = [
+  {
+    name: "Meta Front-end Developer Specialization",
+    image: metaCert,
+    url : "",
+  },
+  {
+    name: "Meta Front-end Developer Specialization",
+    image: "",
+    url : "",
+  },
+  {
+    name: "Meta Front-end Developer Specialization",
+    image: "",
+    url : "",
+  },
+  {
+    name: "Meta Front-end Developer Specialization",
+    image: "",
+    url : "",
+  },
+  {
+    name: "Meta Front-end Developer Specialization",
+    image: "",
+    url : "",
+  },
+  {
+    name: "Meta Front-end Developer Specialization",
+    image: "",
+    url : "",
+  },
+  {
+    name: "Meta Front-end Developer Specialization",
+    image: "",
+    url : "",
+  },
+  {
+    name: "Meta Front-end Developer Specialization",
+    image: "",
+    url : "",
+  },
+  {
+    name: "Meta Front-end Developer Specialization",
+    image: "",
+    url : "",
+  },
+  {
+    name: "Meta Front-end Developer Specialization",
+    image: "",
+    url : "",
+  },
+  {
+    name: "Meta Front-end Developer Specialization",
+    image: "",
+    url : "",
+  },
+  {
+    name: "Meta Front-end Developer Specialization",
+    image: "",
+    url : "",
+  },
+]
+
+export { experiences, projects, certs };
 
