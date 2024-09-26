@@ -58,7 +58,7 @@ const ProjectCard = ({
   );
 };
 
-const Portfolio = () => {
+const Projects = () => {
   return (
     <div className='text-center md:text-left md:px-18 lg:px-38'>
       <motion.div variants={textVariant()}>
@@ -74,4 +74,4 @@ const Portfolio = () => {
   );
 };
 
-export default SectionWrapper(Portfolio, "portfolio");
+export default SectionWrapper(Projects, "projects");

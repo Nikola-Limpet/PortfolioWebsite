@@ -23,7 +23,7 @@ const Hero = ({ scrollContainer }) => {
           </div>
         </div>
         <div className="flex-1 flex justify-start lg:justify-end mt-9 sm:mt-14 ml-12  xs:ml-[-4vh] sm:ml-[-17vh] md:ml-[-26vh] lg:mt-10 2xl:mt-0">
-          <div className='font-bold mt-36 px-12 py-12 text-[15px] sm:text-[25px] md:text-[36px] xs:top-[230px] first-letter: md:mt-12 2xl:text-[20px] sm:leading-[40px] md:leading-[50px] 2xl:leading-[60px] streaky-glow max-w-sm 2xl:max-w-lg text-white text-left'>
+          <div className='font-bold mt-36 px-12 py-12 text-[17px] sm:text-[25px] md:text-[36px] xs:top-[330px] xs:pr-3 first-letter: md:mt-12 2xl:text-[20px] sm:leading-[40px] md:leading-[50px] 2xl:leading-[60px] streaky-glow max-w-sm 2xl:max-w-lg text-white text-left'>
            If I fall from the sky, I wonder if I would fall infinitely or reach to the stars.
           </div>
         </div>
