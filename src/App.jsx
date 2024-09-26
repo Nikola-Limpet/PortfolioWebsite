@@ -8,7 +8,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <div className='relative z-0 bg-[#274538]'>
+      <div className='relative z-0 bg-[#101827]'>
         <Navbar />
         <div className='wrapper' ref={wrapperRef}>
           <div id="hero" className='z-10'>

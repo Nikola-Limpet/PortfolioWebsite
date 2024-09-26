@@ -8,6 +8,7 @@ import {
   introReact,
   jsHardPart,
   vanillaJs,
+  tailwindCss,
 } from "../assets";
 
 export const navLinks = [
@@ -88,7 +89,7 @@ const projects = [
 
 const certs = [
   {
-    name: "(Meta) Front-end Developer Specialization",
+    name: "(Meta) FrontEnd Developer",
     image: metaCert,
     url : "https://www.coursera.org/account/accomplishments/specialization/N849S7D8TADJ",
   },
@@ -113,9 +114,9 @@ const certs = [
     url : "https://static.frontendmasters.com/ud/c/f773b2614a/kAOVCxrlvT/javascript-projects.pdf",
   },
   {
-    name: "Meta Front-end Developer Specialization",
-    image: "",
-    url : "",
+    name: "Tailwind CSS",
+    image: tailwindCss,
+    url : "https://static.frontendmasters.com/ud/c/f773b2614a/hXdaKmozON/tailwind-css.pdf",
   },  
 ]
 

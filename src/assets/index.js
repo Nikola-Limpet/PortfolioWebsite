@@ -9,7 +9,8 @@ import cs50Cert from "./cs50Cert.png";
 import introReact from "./introReact.png";
 import jsHardPart from "./jsHardPart.png";
 import vanillaJs from "./vanillaJs.png";
+import tailwindCss from "./tailwindCss.png";
 
 export { metaCert, close, logo, menu, project2, project3, cs50Cert 
-  , littleLemon, introReact, jsHardPart , vanillaJs};
+  , littleLemon, introReact, jsHardPart , vanillaJs, tailwindCss };
 
