@@ -1,4 +1,4 @@
-import { int } from "three/examples/jsm/nodes/Nodes.js";
+// import { int } from "three/examples/jsm/nodes/Nodes.js";
 import {
   metaCert,
   project2,
@@ -7,6 +7,7 @@ import {
   cs50Cert,
   introReact,
   jsHardPart,
+  vanillaJs,
 } from "../assets";
 
 export const navLinks = [
@@ -39,7 +40,7 @@ export const navLinks = [
 
 const experiences = [
   {
-    title: "Software Developer Student",
+    title: "Software Developement Student",
     company_name: "American University of Phnom Penh",
     date: "2023 - 2027",
     details: [
@@ -53,7 +54,7 @@ const experiences = [
     company_name: "CAMO",
     date: "Present",
     details: [
-      "Builting a reliable website for organization with both <span style='color: white;'>Frontend and Backend developement modern technology</span>",
+      "Building a reliable website for organization with both <span style='color: white;'>Frontend and Backend developement modern technology</span>",
       "Willing to spend time in order to develope society by <span style='color: white;'>Building a Start up Mathemathics Competition</span> to gain more soft skills.",
     ],
   },
@@ -107,45 +108,15 @@ const certs = [
     url : "https://static.frontendmasters.com/ud/c/f773b2614a/fjjCYVxYTO/javascript-hard-parts-v2.pdf",
   },
   {
-    name: "Meta Front-end Developer Specialization",
-    image: "",
-    url : "",
+    name: "Vanilla JavaScript Projects",
+    image: vanillaJs,
+    url : "https://static.frontendmasters.com/ud/c/f773b2614a/kAOVCxrlvT/javascript-projects.pdf",
   },
   {
     name: "Meta Front-end Developer Specialization",
     image: "",
     url : "",
-  },
-  {
-    name: "Meta Front-end Developer Specialization",
-    image: "",
-    url : "",
-  },
-  {
-    name: "Meta Front-end Developer Specialization",
-    image: "",
-    url : "",
-  },
-  {
-    name: "Meta Front-end Developer Specialization",
-    image: "",
-    url : "",
-  },
-  {
-    name: "Meta Front-end Developer Specialization",
-    image: "",
-    url : "",
-  },
-  {
-    name: "Meta Front-end Developer Specialization",
-    image: "",
-    url : "",
-  },
-  {
-    name: "Meta Front-end Developer Specialization",
-    image: "",
-    url : "",
-  },
+  },  
 ]
 
 export { experiences, projects, certs };

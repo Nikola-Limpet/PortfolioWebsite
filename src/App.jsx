@@ -8,25 +8,25 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <div className='relative z-0 bg-[#1e241e]'>
+      <div className='relative z-0 bg-[#274538]'>
         <Navbar />
         <div className='wrapper' ref={wrapperRef}>
           <div id="hero" className='z-10'>
             <Hero scrollContainer={wrapperRef} />
           </div>
-          <div id="projects" className='relative z-30 bg-[#1e241e] mt-[-2px]'>
+          <div id="projects" className='relative z-30 bg-[#101827] mt-[-2px]'>
             <Projects />
           </div>
-          <div id="certifications" className='relative z-30 bg-[#1e241e] mt-[-2px]'>
+          <div id="certifications" className='relative z-30 bg-[#101827] mt-[-2px]'>
             <Certifications/>
           </div>
-          <div id="experience" className='relative z-30 bg-[#1e241e]'>
+          <div id="experience" className='relative z-30 bg-[#101827]'>
             <Experience />
           </div>
-          <div id="contact" className='relative z-30 bg-[#1e241e]'>
+          <div id="contact" className='relative z-30 bg-[#101827]'>
             <Contact />
           </div>
-          <div id='footer' className='relative z-30 bg-[#1e241e]'>
+          <div id='footer' className='relative z-30 bg-[#101827]'>
             <Footer />
           </div>
         </div>
