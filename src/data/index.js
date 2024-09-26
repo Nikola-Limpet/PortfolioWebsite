@@ -1,8 +1,12 @@
+import { int } from "three/examples/jsm/nodes/Nodes.js";
 import {
   metaCert,
   project2,
   project3,
   littleLemon,
+  cs50Cert,
+  introReact,
+  jsHardPart,
 } from "../assets";
 
 export const navLinks = [
@@ -83,24 +87,24 @@ const projects = [
 
 const certs = [
   {
-    name: "Meta Front-end Developer Specialization",
+    name: "(Meta) Front-end Developer Specialization",
     image: metaCert,
-    url : "",
+    url : "https://www.coursera.org/account/accomplishments/specialization/N849S7D8TADJ",
   },
   {
-    name: "Meta Front-end Developer Specialization",
-    image: "",
-    url : "",
+    name: "CS'50 (Harvard University)",
+    image: cs50Cert,
+    url : "https://certificates.cs50.io/7bffca64-1216-496f-af65-910e338f4a96.png?size=letter",
   },
   {
-    name: "Meta Front-end Developer Specialization",
-    image: "",
-    url : "",
+    name: "Complete Intro to React, v8",
+    image: introReact,
+    url : "https://static.frontendmasters.com/ud/c/f773b2614a/BoYXCMJijv/complete-react-v8.pdf",
   },
   {
-    name: "Meta Front-end Developer Specialization",
-    image: "",
-    url : "",
+    name: "JavaScript: The Hard Parts, v2",
+    image: jsHardPart,
+    url : "https://static.frontendmasters.com/ud/c/f773b2614a/fjjCYVxYTO/javascript-hard-parts-v2.pdf",
   },
   {
     name: "Meta Front-end Developer Specialization",

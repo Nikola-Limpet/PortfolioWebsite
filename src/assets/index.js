@@ -5,7 +5,9 @@ import metaCert from "./metaCert.jpeg";
 import littleLemon from "./littleLemon.png"
 import project2 from "./project2.png";
 import project3 from "./project3.png";
+import cs50Cert from "./cs50Cert.png";
+import introReact from "./introReact.png";
+import jsHardPart from "./jsHardPart.png";
 
-
-export { metaCert, close, logo, menu, project2, project3, littleLemon };
+export { metaCert, close, logo, menu, project2, project3, cs50Cert , littleLemon, introReact, jsHardPart};
 
