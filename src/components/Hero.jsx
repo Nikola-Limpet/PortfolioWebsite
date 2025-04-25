@@ -6,7 +6,7 @@ const Hero = ({ scrollContainer }) => {
     <section className="parallax container relative overflow-hidden">
       <div className='parallax__content absolute top-[90%] w-full mx-auto lg:pl-[38vh] lg:pr-[30vh] xl:pl-96 xl:pr-72 2xl:px-40 3xl:px-60 flex flex-col lg:flex-row items-start z-10'>
         <div className="flex-1 lg:mb-0">
-          <h4 className=' text-white font-mono font-medium text-lg pt-20 py-6  '>
+          <div className='pt-20 py-6'>
             <h3 className='animate-textRotate1 font-light text-6xl pl-4 mb-5 p-3 text-teal-300'> <span className="font-mono text-white text-base">Hi, I'm</span> Nikola. </h3>
             <p className='font-mono text-lg pl-4 text-blue-300'>
              I'm always open to new opportunities and challenges.
@@ -17,7 +17,7 @@ const Hero = ({ scrollContainer }) => {
             <p className='font-mono text-lg pl-4 py-4 text-blue-300'>
               if you have any questions or want to work with me.
             </p>
-          </h4>
+          </div>
           <div className=" p-4 mt-10">
             <Position />
           </div>

@@ -1,14 +1,16 @@
 // import { int } from "three/examples/jsm/nodes/Nodes.js";
 import {
   metaCert,
-  project2,
   project3,
-  littleLemon,
   cs50Cert,
   introReact,
   jsHardPart,
   vanillaJs,
   tailwindCss,
+  bigFat,
+  cimoc,
+  awsCert,
+  fullStackCert
 } from "../assets";
 
 export const navLinks = [
@@ -23,6 +25,10 @@ export const navLinks = [
   {
     id: "certifications",
     title: "Certifications",
+  },
+  {
+    id: "skills",
+    title: "Skills",
   },
   {
     id: "experience",
@@ -41,42 +47,47 @@ export const navLinks = [
 
 const experiences = [
   {
-    title: "Software Developement Student",
-    company_name: "American University of Phnom Penh",
-    date: "2023 - 2027",
+    title: "Co-Founder at Cambodia International Mathemathics Olympiad Championship",
+    company_name: "CIMOC",
+    date: "2024 - Present",
     details: [
-      "ICT's student specilizing in Software Developemnt, <span style='color: white;'>with CGPA: 3.87/4.00 </span>.",
-      "<span style='color: white;'>Have a deep understanding in Current Technology</span> and how to apply them in real world.",
-      "<span style='color: white;'>MERN Stack Developer</span> with a strong foundation in React, Node, Express, and MongoDB.",
+      "Organized the Cambodian Mathematical Olympiad Competition <span style='color: white;'>(CIMOC)</span>, engaging over <span style='color: white;'>1,000+ students from 100+ schools</span> across all 25 provinces.",
+      "Developed and deployed a <span style='color: white;'>scalable online exam platform</span> using Next.js, NestJS, and PostgreSQL to ensure reliable test delivery.",
+      "Collaborated with schools and teachers to <span style='color: white;'>design and implement innovative teaching methods</span> that enhance students' problem-solving skills and critical thinking.",
     ],
   },
   {
-    title: "Co-Founder Cambodia Mathemathics Olympiad", 
-    company_name: "CAMO",
-    date: "Present",
+    title: "React Workshop Facilitator", 
+    company_name: "at AUPP",
+    date: "February 2025",
     details: [
-      "Building a reliable website for organization with both <span style='color: white;'>Frontend and Backend developement modern technology</span>",
-      "Willing to spend time in order to develope society by <span style='color: white;'>Building a Start up Mathemathics Competition</span> to gain more soft skills.",
+      "Led a <span style='color: white;'>3-hour React workshop</span> at AUPP, teaching core concepts and helping students get started with modern web development.",
+      "Delivered hands-on training on <span style='color: white;'>JavaScript fundamentals and React best practices</span>, including a clear learning roadmap and curated resources.",
+      "Workshop supported by the <span style='color: white;'>Dean of the School of Digital Technology</span> and attended by 20+ enthusiastic students.",
     ],
   },
 ];
 
 const projects = [
   {
-    name: "Little Lemon Shop",
+    name: "BigFat Pizza – Online Pizza Ordering Web App",
     description: [
-      "This project was created during Meta's Coursera Front-End Development course. ",
-      "This was created with React Components to show an understanding of utilizing React for creating the website.",
+      "Built a full-stack web application with React, Redux, Node.js, Express, and MongoDB.",
+      "Features include a real-time order tracking system, admin dashboard, secure authentication, and mobile responsiveness.",
+      "Employed Docker and Docker Compose for containerization, with CI/CD integration using GitHub Actions.",
     ],
-    image: littleLemon,
-    url : 'https://little-lemon-shop.vercel.app',
+    image: bigFat,
+    url : 'https://big-fat-pizza.vercel.app',
   },
   {
-    name: "Culture Insigts Collective Learning Platform",
-    description:
-      "This project was submited as a protoype to join UNESCO HACKATON that participated nearly 50 countries around the glope. Culture Insights Collective to host their learning materials and resources. In order to help others learn about the other country culture.",
-    image: project2,
-    url : 'https://youth-hackaton.vercel.app/',
+    name: "Online Mathematical Olympiad Exam System (CIMOC)",
+    description: [
+      "Developed a scalable and secure online exam platform supporting 1,000-1,500 concurrent users.",
+      "Key features include role-based user management, automated grading, exam scheduling, and a real-time leaderboard.",
+      "Tech stack: NestJS, PostgreSQL, Redis, Next.js, React, JWT, Docker"
+    ],
+    image: cimoc,
+    url : 'https://www.cimoc-exam.com/',
   },
   {
     name: "Word Guessing Game",
@@ -88,6 +99,17 @@ const projects = [
 ];
 
 const certs = [
+
+  {
+    name: "AWS Certified Cloud Practitioner",
+    image: awsCert,
+    url : "https://www.credly.com/earner/earned/badge/eaaefe59-4504-48e8-b621-4abfef55b97b",
+  },
+  {
+    name: "Full Stack Web Development Bootcamp (University of Hensinki - Finland)",
+    image: fullStackCert,
+    url : "https://studies.cs.helsinki.fi/stats/api/certificate/fullstackopen/en/0975995e1e422d99c542e3a629b4c33c",
+  },
   {
     name: "(Meta) FrontEnd Developer",
     image: metaCert,

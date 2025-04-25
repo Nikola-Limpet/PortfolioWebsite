@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { BrowserRouter } from "react-router-dom";
-import { Certifications, Contact, Experience, Hero, Navbar, Projects} from "./components";
+import { Certifications, Contact, Experience, Hero, Navbar, Projects, SkillSections } from "./components";
 import Footer from "./components/Footer";
 
 const App = () => {
@@ -20,6 +20,9 @@ const App = () => {
           <div id="certifications" className='relative z-30 bg-[#101827] mt-[-2px]'>
             <Certifications/>
           </div>
+          <div id="skills" className='relative z-30 bg-[#101827] mt-[-2px]'>
+            <SkillSections />
+          </div>
           <div id="experience" className='relative z-30 mt-[-2px] bg-[#101827]'>
             <Experience />
           </div>
@@ -29,6 +32,8 @@ const App = () => {
           <div id='footer' className='relative z-30 bg-[#101827]'>
             <Footer />
           </div>
+
+          
         </div>
       </div>
     </BrowserRouter>

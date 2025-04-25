@@ -10,7 +10,10 @@ import introReact from "./introReact.png";
 import jsHardPart from "./jsHardPart.png";
 import vanillaJs from "./vanillaJs.png";
 import tailwindCss from "./tailwindCss.png";
-
+import bigFat from "./big-fat.png";
+import cimoc from "./cimoc-page.png";
+import awsCert from "./aws-cert.png";
+import fullStackCert from "./fullStackCert.png";
+import projectBg from "./project-bg.jpg";
 export { metaCert, close, logo, menu, project2, project3, cs50Cert 
-  , littleLemon, introReact, jsHardPart , vanillaJs, tailwindCss };
-
+  , littleLemon, introReact, jsHardPart , vanillaJs, tailwindCss, bigFat, cimoc, awsCert, fullStackCert, projectBg };
