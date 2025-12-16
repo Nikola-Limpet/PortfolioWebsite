@@ -65,40 +65,57 @@ const experiences = [
 
 const projects = [
   {
-    name: "BigFat Pizza – Online Pizza Ordering Web App",
-    description: [
-      "Built a full-stack web application with React, Redux, Node.js, Express, and MongoDB.",
-      "Features include a real-time order tracking system, admin dashboard, secure authentication, and mobile responsiveness.",
-      "Employed Docker and Docker Compose for containerization, with CI/CD integration using GitHub Actions.",
-    ],
-    image: bigFat,
-    url : 'https://big-fat-pizza.vercel.app',
+    name: "Smart Education School",
+    tagline: "Asian Math Olympiad Learning Platform",
+    description: "International olympiad competition platform serving 500+ participants across 15 countries with $10K prize pools. Features 50+ courses, real-time contests, and practice problems for K-12 students.",
+    tech: ["Next.js", "React", "Clerk Auth", "PostgreSQL", "Tailwind CSS"],
+    stats: { users: "500+", countries: "15", courses: "50+" },
+    image: "/projects/smart-education.png",
+    url: "https://www.smarteducationschool.com/",
+    featured: true,
   },
   {
-    name: "Online Mathematical Olympiad Exam System (CIMOC)",
-    description: [
-      "Developed a scalable and secure online exam platform supporting 1,000-1,500 concurrent users.",
-      "Key features include role-based user management, automated grading, exam scheduling, and a real-time leaderboard.",
-      "Tech stack: NestJS, PostgreSQL, Redis, Next.js, React, JWT, Docker"
-    ],
+    name: "RorHash - Voice AI Platform",
+    tagline: "Bilingual Speech-to-Text Intelligence",
+    description: "Voice-to-intelligence platform processing Khmer and English speech into actionable insights. Features real-time WebSocket sync, AI video generation, and workflow automation.",
+    tech: ["Next.js", "Socket.io", "Node.js", "OpenAI", "Tailwind CSS"],
+    stats: { languages: "2", features: "6+", realtime: "Yes" },
+    image: "/projects/rorhash-voice.png",
+    url: "https://small-demo-speech-to-text.vercel.app/",
+    featured: true,
+  },
+  {
+    name: "CIMOC Exam Platform",
+    tagline: "National Math Olympiad System",
+    description: "Scalable online exam platform supporting 1,500 concurrent users across 100+ schools in 25 provinces. Role-based management, automated grading, and real-time leaderboards.",
+    tech: ["NestJS", "PostgreSQL", "Redis", "Next.js", "Docker"],
+    stats: { users: "1000+", schools: "100+", provinces: "25" },
     image: cimoc,
-    url : 'https://www.cimoc-exam.com/',
+    url: "https://www.cimoc-exam.com/",
+    featured: true,
   },
   {
-    name: "Word Guessing Game",
-    description:
-      "This project inspire from Tiktok that user have to quess 5 letter words. The game will give you 6 chances to guest the word. The word will be updated every day at 12:00 AM by calling 3rd party API call.",
-    image: project3,
-    url : 'https://nikola-limpet.github.io/word-guessing.github.io/',
+    name: "BigFat Pizza",
+    tagline: "Full-Stack Food Ordering App",
+    description: "Complete pizza ordering system with real-time order tracking, admin dashboard, secure authentication, and mobile-first design. Containerized with Docker and CI/CD via GitHub Actions.",
+    tech: ["React", "Redux", "Node.js", "MongoDB", "Docker"],
+    stats: null,
+    image: bigFat,
+    url: "https://big-fat-pizza.vercel.app",
+    featured: false,
   },
 ];
 
 const certs = [
-
+  {
+    name: "AWS Solutions Architect Associate",
+    image: "https://images.credly.com/size/340x340/images/0e284c3f-5164-4b21-8660-0d84737941bc/image.png",
+    url: "https://www.credly.com/badges/b74b8d00-f95a-401d-8225-1ea29ae2a6a2/linked_in?t=swqtka",
+  },
   {
     name: "AWS Certified Cloud Practitioner",
     image: awsCert,
-    url : "https://www.credly.com/earner/earned/badge/eaaefe59-4504-48e8-b621-4abfef55b97b",
+    url: "https://www.credly.com/badges/4d0c1415-9e2f-41ef-8f8b-50bf013d227b/linked_in",
   },
   {
     name: "Full Stack Web Development Bootcamp (University of Hensinki - Finland)",

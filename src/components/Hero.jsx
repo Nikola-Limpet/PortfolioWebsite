@@ -377,7 +377,7 @@ const Hero = ({ scrollContainer }) => {
               <div className="text-white/40 text-sm">Team Size Led</div>
             </div>
             <div className="hero-stats" style={{ opacity: 0 }}>
-              <div className="text-3xl sm:text-4xl font-bold text-white">3+</div>
+              <div className="text-3xl sm:text-4xl font-bold text-white">2+</div>
               <div className="text-white/40 text-sm">Years Building</div>
             </div>
           </div>
