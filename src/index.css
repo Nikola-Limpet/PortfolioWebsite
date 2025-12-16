@@ -150,15 +150,17 @@
 }
 
 .footer__social-media a {
-  color: #0ff;
+  color: #F0EFEB;
   text-decoration: none;
   padding: 12px;
   display: flex;
   align-items: center;
+  transition: all 0.3s ease;
 }
 
 .footer__social-media a:hover {
-  text-decoration: underline;
+  color: #1689C8;
+  transform: translateX(5px);
 }
 
 .footer__social-media svg {

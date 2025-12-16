@@ -28,6 +28,9 @@ const SpacemanCanvas = ({ scrollContainer }) => {
 
   useEffect(() => {
     const handleScroll = () => {
+      // Check if scrollContainer and current exist
+      if (!scrollContainer.current) return;
+
       const scrollTop = scrollContainer.current.scrollTop;
       const rotationXValue = scrollTop * -0.0006;
       const rotationYValue = scrollTop * -0.00075;
@@ -41,26 +44,61 @@ const SpacemanCanvas = ({ scrollContainer }) => {
         setPosition([0.2, -0.1, 0]);
       } else if (window.innerWidth < 1024) {
         setScale([1.33, 1.33, 1.33]);
-        setPosition([0.2, -0.3, 0]);
+        setPosition([0.2, -0.1, 0]); // Was -0.3
       } else if (window.innerWidth < 1280) {
         setScale([1.5, 1.5, 1.5]);
-        setPosition([0.2, -0.4, 0]);
+        setPosition([0.2, -0.1, 0]); // Was -0.4
       } else if (window.innerWidth < 1536) {
         setScale([1.66, 1.66, 1.66]);
-        setPosition([0.2, -0.5, 0]);
+        setPosition([0.2, -0.2, 0]); // Was -0.5
       } else {
         setScale([2, 2, 2]);
-        setPosition([0.2, -0.7, 0]);
+        setPosition([0.2, -0.3, 0]); // Was -0.7
       }
     };
 
+    const container = scrollContainer.current;
+
+    // Initial call to set positions
     handleResize();
-    window.addEventListener("scroll", handleScroll);
+
+    // Add event listeners
+    // Note: We are combining scroll and mouse logic.
+    // Ideally we'd use a ref for values and useFrame for smooth animation loop,
+    // but updating state on mousemove is acceptable for this complexity.
+
+    const handleMouseMove = (event) => {
+      // Normalizing mouse position from -1 to 1
+      const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+      const mouseY = (event.clientY / window.innerHeight) * 2 - 1;
+
+      if (scrollContainer.current) {
+        const scrollTop = scrollContainer.current.scrollTop;
+        // Base scroll rotation
+        let rotX = scrollTop * -0.0006;
+        let rotY = scrollTop * -0.00075;
+
+        // Add subtle mouse influence
+        rotY += mouseX * 0.5; // Look left/right
+        rotX += mouseY * 0.3; // Look up/down (inverted/non-inverted as preferred)
+
+        setRotationX(rotX);
+        setRotationY(rotY);
+      }
+    };
+
+    if (container) {
+      container.addEventListener("scroll", handleScroll); // Keep existing scroll handler for scroll-only updates
+    }
     window.addEventListener("resize", handleResize);
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      if (container) {
+        container.removeEventListener("scroll", handleScroll);
+      }
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, [scrollContainer]);
 

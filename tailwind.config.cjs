@@ -34,6 +34,11 @@ module.exports = {
         title: '2rem',
         subtitle: '1.5rem',
       },
+      boxShadow: {
+        'glow-sm': '0 0 10px rgba(22, 137, 200, 0.2)',
+        'glow': '0 0 20px rgba(22, 137, 200, 0.3)',
+        'glow-lg': '0 0 30px rgba(22, 137, 200, 0.4)',
+      },
     },
   },
   plugins: [],

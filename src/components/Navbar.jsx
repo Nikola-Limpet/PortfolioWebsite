@@ -1,8 +1,9 @@
-
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { close, menu, logo } from "../assets";
 import { navLinks } from "../data";
+
 const Navbar = () => {
   const [active, setActive] = useState("hero");
   const [toggle, setToggle] = useState(false);
@@ -61,13 +62,17 @@ const Navbar = () => {
           {navLinks.map((nav) => (
             <li
               key={nav.id}
-              className={`relative flex items-center ${
-                active === nav.id ? "text-white" : "text-slate-500"
+              className={`relative flex items-center transition-colors duration-300 ${
+                active === nav.id ? "text-white" : "text-white/50"
               } hover:text-white text-[18px] lg:text-[24px] font-bold pointer-events-auto cursor-pointer`}
               onClick={() => setActive(nav.id)}
             >
               {active === nav.id && (
-                <div className="fixed right-10 w-2 h-6 lg:h-8 bg-quaternary"></div>
+                <motion.div
+                  layoutId="navIndicator"
+                  className="fixed right-10 w-2 h-6 lg:h-8 bg-quaternary rounded-full shadow-glow"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
               )}
               <a href={`#${nav.id}`}>{nav.title}</a>
             </li>
@@ -82,18 +87,21 @@ const Navbar = () => {
             onClick={() => setToggle(!toggle)}
           />
 
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: toggle ? 1 : 0, y: toggle ? 0 : -20 }}
+            transition={{ duration: 0.3 }}
             className={`${
               !toggle ? "hidden" : "flex"
-            } p-6 absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-30 rounded-xl`}
+            } p-6 absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-30 rounded-xl bg-primary/90 backdrop-blur-md border border-tertiary/30 pointer-events-auto`}
           >
             <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
               {navLinks.map((nav) => (
                 <li
                   key={nav.id}
-                  className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                    active === nav.id ? "text-quaternary" : "text-secondary"
-                  }`}
+                  className={`font-poppins font-medium cursor-pointer text-[16px] transition-colors duration-300 ${
+                    active === nav.id ? "text-quaternary" : "text-white/70"
+                  } hover:text-quaternary`}
                   onClick={() => {
                     setToggle(!toggle);
                     setActive(nav.id);
@@ -103,7 +111,7 @@ const Navbar = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
       </div>
     </nav>

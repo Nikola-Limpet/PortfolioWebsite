@@ -96,12 +96,6 @@ const Projects = () => {
           <div className="w-full md:w-1/3 h-px bg-quaternary/30 mt-6"></div>
         </motion.div>
 
-        <motion.p 
-          variants={fadeIn("up", "spring", 0.2, 0.8)}
-          className="text-white/80 text-lg max-w-2xl mx-auto md:mx-0 mb-16"
-        >
-          Here are some of my recent projects that showcase my skills and experience. Each project reflects my ability to solve complex problems, work with different technologies, and manage projects effectively.
-        </motion.p>
 
         <div className='flex flex-col gap-16 md:gap-24'>
           {projects.map((project, index) => (
