@@ -9,6 +9,12 @@ const Hero = ({ scrollContainer }) => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Set initial states explicitly so elements are hidden before GSAP animates
+      gsap.set('.hero-tagline', { opacity: 0, y: 20 });
+      gsap.set('.hero-stats', { opacity: 0, y: 20 });
+      gsap.set('.hero-cta', { opacity: 0, y: 20 });
+      gsap.set('.scroll-indicator', { opacity: 0, y: 20 });
+
       // Timeline for initial layer reveal (on page load)
       const revealTL = gsap.timeline();
 
@@ -362,28 +368,28 @@ const Hero = ({ scrollContainer }) => {
           </div>
 
           {/* Tagline */}
-          <p className="hero-tagline text-white/60 text-lg sm:text-xl max-w-lg mb-8 leading-relaxed" style={{ opacity: 0 }}>
+          <p className="hero-tagline text-white/60 text-lg sm:text-xl max-w-lg mb-8 leading-relaxed">
             Full Stack Developer & Team Lead. From freelance projects to leading teams of 5+, I ship scalable web applications that serve thousands of users.
           </p>
 
           {/* Stats - Apple style minimal */}
           <div className="flex flex-wrap gap-8 sm:gap-12 mb-10">
-            <div className="hero-stats" style={{ opacity: 0 }}>
+            <div className="hero-stats">
               <div className="text-3xl sm:text-4xl font-bold text-white">1000+</div>
               <div className="text-white/40 text-sm">Users Served</div>
             </div>
-            <div className="hero-stats" style={{ opacity: 0 }}>
+            <div className="hero-stats">
               <div className="text-3xl sm:text-4xl font-bold text-white">5+</div>
               <div className="text-white/40 text-sm">Team Size Led</div>
             </div>
-            <div className="hero-stats" style={{ opacity: 0 }}>
+            <div className="hero-stats">
               <div className="text-3xl sm:text-4xl font-bold text-white">2+</div>
               <div className="text-white/40 text-sm">Years Building</div>
             </div>
           </div>
 
           {/* CTA */}
-          <div className="hero-cta flex flex-wrap gap-4" style={{ opacity: 0 }}>
+          <div className="hero-cta flex flex-wrap gap-4">
             <a
               href="#projects"
               className="group px-7 py-4 bg-white text-primary font-semibold rounded-full transition-all duration-300 hover:shadow-xl hover:shadow-white/20 hover:scale-105 flex items-center gap-2"
@@ -408,7 +414,7 @@ const Hero = ({ scrollContainer }) => {
       </div>
 
       {/* Scroll indicator */}
-      <div className="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2" style={{ opacity: 0 }}>
+      <div className="scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
         <span className="text-white/40 text-xs font-mono tracking-widest uppercase">Scroll</span>
         <div className="w-[1px] h-12 bg-gradient-to-b from-white/50 to-transparent relative">
           <div className="absolute top-0 left-0 w-full h-4 bg-white animate-pulse" style={{ animation: 'scrollPulse 1.5s ease-in-out infinite' }} />

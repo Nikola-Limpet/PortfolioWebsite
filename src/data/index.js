@@ -8,7 +8,6 @@ import {
   vanillaJs,
   tailwindCss,
   bigFat,
-  cimoc,
   awsCert,
   fullStackCert
 } from "../assets";
@@ -42,6 +41,16 @@ export const navLinks = [
 
 const experiences = [
   {
+    title: "Founder of JoulHub",
+    company_name: "JoulHub",
+    date: "2025 - Present",
+    details: [
+      "Founded <span style='color: white;'>JoulHub</span>, an all-in-one property management platform for Cambodian landlords, achieving <span style='color: white;'>200+ sign-ups</span> within the first months of launch.",
+      "Built and scaled the platform to manage <span style='color: white;'>400+ rooms across 100+ properties</span>, featuring smart invoicing, KHQR payments, tenant portals, and real-time analytics.",
+      "Designed the full product from scratch — <span style='color: white;'>Next.js, Tailwind CSS, shadcn/ui</span> — with bilingual support (Khmer/English) and Progressive Web App capabilities.",
+    ],
+  },
+  {
     title: "Co-Founder at Cambodia International Mathemathics Olympiad Championship",
     company_name: "CIMOC",
     date: "2024 - Present",
@@ -52,7 +61,7 @@ const experiences = [
     ],
   },
   {
-    title: "React Workshop Facilitator", 
+    title: "React Workshop Facilitator",
     company_name: "at AUPP",
     date: "February 2025",
     details: [
@@ -75,23 +84,33 @@ const projects = [
     featured: true,
   },
   {
-    name: "RorHash - Voice AI Platform",
-    tagline: "Bilingual Speech-to-Text Intelligence",
-    description: "Voice-to-intelligence platform processing Khmer and English speech into actionable insights. Features real-time WebSocket sync, AI video generation, and workflow automation.",
-    tech: ["Next.js", "Socket.io", "Node.js", "OpenAI", "Tailwind CSS"],
-    stats: { languages: "2", features: "6+", realtime: "Yes" },
-    image: "/projects/rorhash-voice.png",
-    url: "https://small-demo-speech-to-text.vercel.app/",
+    name: "JoulHub",
+    tagline: "Property Management Platform",
+    description: "All-in-one cloud property management for Cambodian landlords. Smart invoicing, KHQR payments, tenant portals, utility tracking, and real-time analytics — bilingual Khmer/English with PWA support.",
+    tech: ["Next.js", "Tailwind CSS", "shadcn/ui", "PostHog", "Vercel"],
+    stats: { signups: "200+", rooms: "400+", properties: "100+" },
+    image: "/projects/joulhub.png",
+    url: "https://joulhub.com",
     featured: true,
   },
   {
-    name: "CIMOC Exam Platform",
-    tagline: "National Math Olympiad System",
-    description: "Scalable online exam platform supporting 1,500 concurrent users across 100+ schools in 25 provinces. Role-based management, automated grading, and real-time leaderboards.",
-    tech: ["NestJS", "PostgreSQL", "Redis", "Next.js", "Docker"],
-    stats: { users: "1000+", schools: "100+", provinces: "25" },
-    image: cimoc,
-    url: "https://www.cimoc-exam.com/",
+    name: "MLC International School",
+    tagline: "Multi-Campus School CMS",
+    description: "Unified CMS and public website for MLC International School in Cambodia. Content management, staff directory across 3 campuses, events, blog/news, job board, and admission portal.",
+    tech: ["Next.js", "Tailwind CSS", "shadcn/ui", "Turbopack", "Vercel"],
+    stats: { staff: "122", campuses: "3", features: "7+" },
+    image: "/projects/mlcis.png",
+    url: "https://mlcis.nextzen.technology/",
+    featured: true,
+  },
+  {
+    name: "AUPP Alumni Connect",
+    tagline: "University Alumni Network",
+    description: "Full alumni networking platform for the American University of Phnom Penh. Social feed, alumni directory, job board, mentorship program, events, direct messaging, and support for 18 academic programs.",
+    tech: ["Next.js", "React", "Tailwind CSS", "Turbopack", "Vercel"],
+    stats: { programs: "18", features: "9+", platform: "Full" },
+    image: "/projects/aupp-alumni.png",
+    url: "https://connectable.aurrasms.com/feed",
     featured: true,
   },
   {

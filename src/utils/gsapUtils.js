@@ -4,6 +4,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
+// Configure ScrollTrigger to use the .wrapper scroll container.
+// Called once after DOM is ready (from App.jsx or first component mount).
+export const initScrollTrigger = () => {
+  const wrapper = document.querySelector('.wrapper');
+  if (wrapper) {
+    ScrollTrigger.defaults({ scroller: wrapper });
+    ScrollTrigger.refresh();
+  }
+};
+
 // Helper to create parallax effect on elements
 export const createParallax = (element, speed = 0.5, options = {}) => {
   return gsap.to(element, {

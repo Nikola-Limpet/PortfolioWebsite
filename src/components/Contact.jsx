@@ -1,19 +1,67 @@
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { SectionWrapper } from "../hoc";
 import { styles } from "../styles";
+import { gsap, ScrollTrigger } from "../utils/gsapUtils";
 import emailjs from 'emailjs-com';
 import { FaTelegram, FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 
 const Contact = () => {
   const form = useRef();
+  const sectionRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
-  const controls = useAnimation();
 
   useEffect(() => {
-    controls.start("show");
-  }, [controls]);
+    const ctx = gsap.context(() => {
+      // Title reveal on scroll
+      gsap.fromTo('.contact-title',
+        { opacity: 0, y: 60, scale: 0.95 },
+        {
+          opacity: 1, y: 0, scale: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            end: 'top 50%',
+            scrub: 1,
+          }
+        }
+      );
+
+      // Left panel slide in
+      gsap.fromTo('.contact-left',
+        { opacity: 0, x: -60 },
+        {
+          opacity: 1, x: 0,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 70%',
+            end: 'top 35%',
+            scrub: 1,
+          }
+        }
+      );
+
+      // Right panel slide in
+      gsap.fromTo('.contact-right',
+        { opacity: 0, x: 60 },
+        {
+          opacity: 1, x: 0,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 70%',
+            end: 'top 35%',
+            scrub: 1,
+          }
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -39,7 +87,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="relative min-h-screen py-20">
+    <div ref={sectionRef} className="relative min-h-screen py-20">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary via-[#0a1628] to-primary z-0" />
 
@@ -48,38 +96,25 @@ const Contact = () => {
       <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px]" />
 
       <div className="container mx-auto relative z-10 px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial="hidden"
-          animate={controls}
-          variants={{
-            hidden: { opacity: 0, y: 50 },
-            show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-          }}
-          className="max-w-5xl mx-auto"
-        >
+        <div className="max-w-5xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-16">
+          <div className="contact-title text-center mb-16">
             <h2 className={`${styles.sectionText} mb-4`}>
               <span className="streaky-glow">Let's Connect</span>
             </h2>
-            <p className="text-white/60 text-lg max-w-md mx-auto">
+            <p className="text-white/50 text-lg max-w-md mx-auto">
               Have a project in mind or want to chat? I'd love to hear from you.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
             {/* Left side - Social & Quick Info */}
-            <div className="lg:col-span-2 space-y-8">
+            <div className="contact-left lg:col-span-2 space-y-8">
               {/* Quick connect card */}
-              <motion.div
-                className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
+              <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-quaternary/20 transition-all duration-500">
                 <h3 className="text-xl font-bold text-white mb-6">Quick Connect</h3>
                 <div className="space-y-4">
-                  {socialLinks.map((social, index) => {
+                  {socialLinks.map((social) => {
                     const Icon = social.icon;
                     return (
                       <a
@@ -102,15 +137,10 @@ const Contact = () => {
                     );
                   })}
                 </div>
-              </motion.div>
+              </div>
 
               {/* Availability badge */}
-              <motion.div
-                className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6"
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
+              <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-green-500/20 transition-all duration-500">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
                   <span className="text-green-400 font-medium">Available for work</span>
@@ -118,28 +148,18 @@ const Contact = () => {
                 <p className="text-white/50 text-sm">
                   Currently open to freelance projects and full-time opportunities.
                 </p>
-              </motion.div>
+              </div>
 
               {/* Location */}
-              <motion.div
-                className="text-white/40 text-sm"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-              >
+              <div className="text-white/40 text-sm">
                 <span className="block">Based in Cambodia</span>
                 <span className="block">UTC+7 Timezone</span>
-              </motion.div>
+              </div>
             </div>
 
             {/* Right side - Contact Form */}
-            <motion.div
-              className="lg:col-span-3"
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
+            <div className="contact-right lg:col-span-3">
+              <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-quaternary/20 transition-all duration-500">
                 {sent ? (
                   <motion.div
                     className="text-center py-16"
@@ -193,7 +213,7 @@ const Contact = () => {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full sm:w-auto px-8 py-4 bg-quaternary text-white font-medium rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-quaternary/30 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3"
+                      className="group w-full sm:w-auto px-8 py-4 bg-quaternary text-white font-medium rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-quaternary/30 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3"
                     >
                       {loading ? (
                         <>
@@ -206,7 +226,7 @@ const Contact = () => {
                       ) : (
                         <>
                           <span>Send Message</span>
-                          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                           </svg>
                         </>
@@ -215,9 +235,9 @@ const Contact = () => {
                   </form>
                 )}
               </div>
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
