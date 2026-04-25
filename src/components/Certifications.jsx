@@ -50,6 +50,7 @@ const Certifications = () => {
   const visibleCerts = showAll ? certs : certs.slice(0, 4);
 
   useEffect(() => {
+    const wrapperEl = document.querySelector('.wrapper');
     const ctx = gsap.context(() => {
       // Title scroll reveal
       gsap.fromTo('.cert-title',
@@ -62,7 +63,7 @@ const Certifications = () => {
             start: 'top 80%',
             end: 'top 50%',
             scrub: 1,
-            scroller: '.wrapper',
+            scroller: wrapperEl,
           }
         }
       );
@@ -81,7 +82,7 @@ const Certifications = () => {
             start: 'top 85%',
             end: 'top 40%',
             scrub: 1,
-            scroller: '.wrapper',
+            scroller: wrapperEl,
           }
         }
       );
@@ -97,7 +98,7 @@ const Certifications = () => {
             start: 'top 70%',
             end: 'top 35%',
             scrub: 1,
-            scroller: '.wrapper',
+            scroller: wrapperEl,
           }
         }
       );
