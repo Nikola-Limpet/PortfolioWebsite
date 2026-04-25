@@ -62,6 +62,7 @@ const Certifications = () => {
             start: 'top 80%',
             end: 'top 50%',
             scrub: 1,
+            scroller: '.wrapper',
           }
         }
       );
@@ -80,6 +81,7 @@ const Certifications = () => {
             start: 'top 85%',
             end: 'top 40%',
             scrub: 1,
+            scroller: '.wrapper',
           }
         }
       );
@@ -95,6 +97,7 @@ const Certifications = () => {
             start: 'top 70%',
             end: 'top 35%',
             scrub: 1,
+            scroller: '.wrapper',
           }
         }
       );
