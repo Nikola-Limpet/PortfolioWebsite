@@ -244,10 +244,6 @@ const Projects = () => {
 
   return (
     <section ref={sectionRef} className="relative">
-      {/* Background — translucent so the starfield shows through */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-[#081a2e]/60 to-primary/80 z-0" />
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-quaternary/[0.03] to-transparent z-0" />
-
       <div className="relative z-10">
         {/* Header */}
         <div className={`${styles.sectionContainer} pt-24`}>

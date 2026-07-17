@@ -2,19 +2,14 @@ import { useEffect } from 'react';
 import { BrowserRouter } from "react-router-dom";
 import { Certifications, Contact, Experience, Hero, Navbar, Projects, SkillSections } from "./components";
 import Footer from "./components/Footer";
-import Starfield from "./components/Starfield";
+import SpaceJourney from "./components/SpaceJourney";
 import ScrollProgress from "./components/ScrollProgress";
 import { ScrollTrigger } from "./utils/gsapUtils";
 import { initSmoothScroll, destroySmoothScroll } from "./utils/smoothScroll";
 
-const SectionDivider = () => (
-  <div className="section-divider" aria-hidden="true" />
-);
-
 const App = () => {
   useEffect(() => {
     initSmoothScroll();
-    // Recalculate trigger positions once layout has settled
     requestAnimationFrame(() => ScrollTrigger.refresh());
 
     return () => destroySmoothScroll();
@@ -26,8 +21,15 @@ const App = () => {
         {/* Subtle noise texture for depth */}
         <div className="noise-overlay" aria-hidden="true" />
 
-        {/* Global 3D starfield behind all sections */}
-        <Starfield />
+        {/* The world — one continuous 3D journey behind everything */}
+        <SpaceJourney />
+
+        {/* Edge vignette keeps overlay text readable against the scene */}
+        <div
+          className="fixed inset-0 z-[1] pointer-events-none"
+          aria-hidden="true"
+          style={{ background: 'radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.45) 100%)' }}
+        />
 
         <ScrollProgress />
         <Navbar />
@@ -39,19 +41,15 @@ const App = () => {
           <div id="projects" className='relative'>
             <Projects />
           </div>
-          <SectionDivider />
           <div id="skills" className='relative'>
             <SkillSections />
           </div>
-          <SectionDivider />
           <div id="certifications" className='relative'>
             <Certifications />
           </div>
-          <SectionDivider />
           <div id="experience" className='relative'>
             <Experience />
           </div>
-          <SectionDivider />
           <div id="contact" className='relative'>
             <Contact />
           </div>

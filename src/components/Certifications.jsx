@@ -105,9 +105,6 @@ const Certifications = () => {
 
   return (
     <div className="relative py-20" ref={sectionRef}>
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-[#0a1628]/60 to-primary/80 z-0" />
-
       {/* Decorative blur */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-quaternary/5 rounded-full blur-[150px]" />
 

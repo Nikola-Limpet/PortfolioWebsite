@@ -4,7 +4,6 @@ import { FaJs, FaReact, FaNodeJs, FaAws, FaDocker, FaGithub, FaPython } from 're
 import { SiTypescript, SiExpress, SiMongodb, SiPostgresql, SiNextdotjs, SiTailwindcss, SiHtml5, SiCss3, SiRedis, SiNestjs } from 'react-icons/si';
 import { gsap, ScrollTrigger } from '../utils/gsapUtils';
 import { styles } from '../styles';
-import FloatingShapes from './FloatingShapes';
 
 const SkillSections = () => {
   const [hoveredSkill, setHoveredSkill] = useState(null);
@@ -86,15 +85,6 @@ const SkillSections = () => {
 
   return (
     <section ref={sectionRef} className="relative min-h-screen overflow-hidden py-24">
-      {/* Background — semi-transparent so the global starfield shows through */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-[#071520]/60 to-primary/80 z-0" />
-
-      {/* 3D Floating Shapes as background */}
-      <FloatingShapes variant="dense" className="z-[1] opacity-60" />
-
-      {/* Subtle radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-quaternary/[0.03] rounded-full blur-[200px] z-0" />
-
       {/* Content */}
       <div className={`${styles.sectionContainer} relative z-20`}>
         {/* Header */}

@@ -152,7 +152,6 @@ const Experience = () => {
   return (
     <div ref={sectionRef} className="relative py-20 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-[#0a1628]/60 to-primary/80 z-0" />
 
       {/* Decorative elements */}
       <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] bg-quaternary/5 rounded-full blur-[150px]" />
