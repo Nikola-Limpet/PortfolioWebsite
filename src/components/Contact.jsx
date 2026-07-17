@@ -89,7 +89,7 @@ const Contact = () => {
   return (
     <div ref={sectionRef} className="relative min-h-screen py-20">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary via-[#0a1628] to-primary z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-[#0a1628]/60 to-primary/80 z-0" />
 
       {/* Decorative elements */}
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-quaternary/5 rounded-full blur-[100px]" />

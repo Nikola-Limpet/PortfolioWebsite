@@ -8,8 +8,27 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
   color-scheme: dark;
+}
+
+/* Lenis smooth scroll (native scroll-behavior must stay off) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+html,
+body {
+  overflow-x: clip;
 }
 
 body {
@@ -77,12 +96,6 @@ h1, h2, h3, h4 {
   transform: translateZ(0);
 }
 
-.wrapper {
-  height: 98vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  perspective: 10px;
-}
 .parallax {
   position: relative;
   min-height: 100vh; /* Adjust this value as needed */

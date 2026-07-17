@@ -48,7 +48,6 @@ const SkillSections = () => {
   ];
 
   useEffect(() => {
-    const wrapperEl = document.querySelector('.wrapper');
     const ctx = gsap.context(() => {
       // Title scroll reveal
       gsap.fromTo('.skill-title',
@@ -61,7 +60,6 @@ const SkillSections = () => {
             start: 'top 80%',
             end: 'top 50%',
             scrub: 1,
-            scroller: wrapperEl,
           }
         }
       );
@@ -78,7 +76,6 @@ const SkillSections = () => {
             start: 'top 85%',
             end: 'top 40%',
             scrub: 1,
-            scroller: wrapperEl,
           }
         }
       );
@@ -89,8 +86,8 @@ const SkillSections = () => {
 
   return (
     <section ref={sectionRef} className="relative min-h-screen overflow-hidden py-24">
-      {/* Background — unique to Skills section (no parallax duplicate) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary via-[#071520] to-primary z-0" />
+      {/* Background — semi-transparent so the global starfield shows through */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-[#071520]/60 to-primary/80 z-0" />
 
       {/* 3D Floating Shapes as background */}
       <FloatingShapes variant="dense" className="z-[1] opacity-60" />

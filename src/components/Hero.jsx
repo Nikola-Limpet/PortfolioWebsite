@@ -1,9 +1,11 @@
 import { useEffect, useRef } from "react";
 import { SpacemanCanvas } from ".";
 import Position from "./Position";
+import Magnetic from "./Magnetic";
 import { gsap, ScrollTrigger } from "../utils/gsapUtils";
+import { scrollToSection } from "../utils/smoothScroll";
 
-const Hero = ({ scrollContainer }) => {
+const Hero = () => {
   const sectionRef = useRef(null);
   const headlineRef = useRef(null);
 
@@ -204,16 +206,8 @@ const Hero = ({ scrollContainer }) => {
         },
       });
 
-      gsap.to('.hero-spaceman', {
-        y: 450,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 0.2,
-        },
-      });
+      // (Spaceman fall is handled in 3D — position/rotation lerp in Spaceman.jsx —
+      // so no DOM translate here; a DOM scrub would fight the depth effect.)
 
       // Scroll indicator fade
       gsap.to('.scroll-indicator', {
@@ -325,7 +319,7 @@ const Hero = ({ scrollContainer }) => {
       {/* Spaceman - between mountains */}
       <div className="hero-spaceman absolute inset-0 will-change-transform" style={{ zIndex: 5, opacity: 0 }}>
         <div className="spaceman-floater w-full h-full">
-          <SpacemanCanvas scrollContainer={scrollContainer} />
+          <SpacemanCanvas />
         </div>
       </div>
 
@@ -390,21 +384,27 @@ const Hero = ({ scrollContainer }) => {
 
           {/* CTA */}
           <div className="hero-cta flex flex-wrap gap-4">
-            <a
-              href="#projects"
-              className="group px-7 py-4 bg-white text-primary font-semibold rounded-full transition-all duration-300 hover:shadow-xl hover:shadow-white/20 hover:scale-105 flex items-center gap-2"
-            >
-              <span>See My Work</span>
-              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </a>
-            <a
-              href="#contact"
-              className="px-7 py-4 border border-white/30 text-white font-semibold rounded-full transition-all duration-300 hover:bg-white/10 hover:border-white/50"
-            >
-              Let's Talk
-            </a>
+            <Magnetic>
+              <a
+                href="#projects"
+                onClick={(e) => { e.preventDefault(); scrollToSection('#projects'); }}
+                className="group px-7 py-4 bg-white text-primary font-semibold rounded-full transition-shadow duration-300 hover:shadow-xl hover:shadow-white/20 flex items-center gap-2"
+              >
+                <span>See My Work</span>
+                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.2}>
+              <a
+                href="#contact"
+                onClick={(e) => { e.preventDefault(); scrollToSection('#contact'); }}
+                className="block px-7 py-4 border border-white/30 text-white font-semibold rounded-full transition-colors duration-300 hover:bg-white/10 hover:border-white/50"
+              >
+                Let's Talk
+              </a>
+            </Magnetic>
           </div>
 
           <div className="mt-8">
