@@ -1,19 +1,18 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter } from "react-router-dom";
 import { Certifications, Contact, Experience, Hero, Navbar, Projects, SkillSections } from "./components";
 import Footer from "./components/Footer";
-import { initScrollTrigger } from "./utils/gsapUtils";
-
-const SectionDivider = () => (
-  <div className="section-divider" aria-hidden="true" />
-);
+import SpaceJourney from "./components/SpaceJourney";
+import ScrollProgress from "./components/ScrollProgress";
+import { ScrollTrigger } from "./utils/gsapUtils";
+import { initSmoothScroll, destroySmoothScroll } from "./utils/smoothScroll";
 
 const App = () => {
-  const wrapperRef = useRef(null);
-
   useEffect(() => {
-    // Initialize ScrollTrigger with the wrapper scroll container after DOM mount
-    initScrollTrigger();
+    initSmoothScroll();
+    requestAnimationFrame(() => ScrollTrigger.refresh());
+
+    return () => destroySmoothScroll();
   }, []);
 
   return (
@@ -22,34 +21,42 @@ const App = () => {
         {/* Subtle noise texture for depth */}
         <div className="noise-overlay" aria-hidden="true" />
 
+        {/* The world — one continuous 3D journey behind everything */}
+        <SpaceJourney />
+
+        {/* Edge vignette keeps overlay text readable against the scene */}
+        <div
+          className="fixed inset-0 z-[1] pointer-events-none"
+          aria-hidden="true"
+          style={{ background: 'radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.45) 100%)' }}
+        />
+
+        <ScrollProgress />
         <Navbar />
-        <div className='wrapper' ref={wrapperRef}>
-          <div id="hero" className='z-10'>
-            <Hero scrollContainer={wrapperRef} />
+
+        <main className='relative z-10'>
+          <div id="hero">
+            <Hero />
           </div>
-          <div id="projects" className='relative z-30'>
+          <div id="projects" className='relative'>
             <Projects />
           </div>
-          <SectionDivider />
-          <div id="skills" className='relative z-30'>
+          <div id="skills" className='relative'>
             <SkillSections />
           </div>
-          <SectionDivider />
-          <div id="certifications" className='relative z-30'>
+          <div id="certifications" className='relative'>
             <Certifications />
           </div>
-          <SectionDivider />
-          <div id="experience" className='relative z-30'>
+          <div id="experience" className='relative'>
             <Experience />
           </div>
-          <SectionDivider />
-          <div id="contact" className='relative z-30'>
+          <div id="contact" className='relative'>
             <Contact />
           </div>
-          <div id='footer' className='relative z-30'>
+          <div id='footer' className='relative'>
             <Footer />
           </div>
-        </div>
+        </main>
       </div>
     </BrowserRouter>
   );

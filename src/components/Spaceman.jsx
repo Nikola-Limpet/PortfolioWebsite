@@ -5,7 +5,7 @@ import * as THREE from "three";
 import spacemanScene from "../assets/3d/spaceman.glb";
 import CanvasLoader from "./Loader";
 
-const Spaceman = ({ scale, position, targetRotation }) => {
+const Spaceman = ({ scale, position, targetRotation, scrollProgress }) => {
   const spacemanRef = useRef();
   const { scene, animations } = useGLTF(spacemanScene);
   const { actions } = useAnimations(animations, spacemanRef);
@@ -15,18 +15,21 @@ const Spaceman = ({ scale, position, targetRotation }) => {
   }, [actions]);
 
   useFrame(() => {
-    if (!spacemanRef.current || !targetRotation.current) return;
+    const m = spacemanRef.current;
+    if (!m || !targetRotation.current) return;
 
-    spacemanRef.current.rotation.x = THREE.MathUtils.lerp(
-      spacemanRef.current.rotation.x,
-      targetRotation.current.x,
-      0.05
-    );
-    spacemanRef.current.rotation.y = THREE.MathUtils.lerp(
-      spacemanRef.current.rotation.y,
-      targetRotation.current.y + 2.2,
-      0.05
-    );
+    // 0 → 1 as the hero scrolls away: the astronaut falls into deep space
+    const p = scrollProgress?.current ?? 0;
+
+    // Slow multi-axis tumble builds as it falls (no drag in vacuum)
+    m.rotation.x = THREE.MathUtils.lerp(m.rotation.x, targetRotation.current.x + p * 1.3, 0.05);
+    m.rotation.y = THREE.MathUtils.lerp(m.rotation.y, targetRotation.current.y + 2.2, 0.05);
+    m.rotation.z = THREE.MathUtils.lerp(m.rotation.z, p * 0.7, 0.04);
+
+    // Drift downward and recede on Z — perspective shrinks it naturally
+    m.position.x = THREE.MathUtils.lerp(m.position.x, position[0] + p * 1.2, 0.06);
+    m.position.y = THREE.MathUtils.lerp(m.position.y, position[1] - p * 5, 0.06);
+    m.position.z = THREE.MathUtils.lerp(m.position.z, position[2] - p * 9, 0.06);
   });
 
   return (
@@ -36,15 +39,21 @@ const Spaceman = ({ scale, position, targetRotation }) => {
   );
 };
 
-const SpacemanCanvas = ({ scrollContainer }) => {
+const SpacemanCanvas = () => {
   const targetRotation = useRef({ x: 0, y: 0 });
+  const scrollProgress = useRef(0);
   const [scale, setScale] = useState([2, 2, 2]);
   const [position, setPosition] = useState([0.2, -0.7, 0]);
 
   useEffect(() => {
+    const updateProgress = () => {
+      // Fall completes over ~1.2 viewport heights of scrolling
+      scrollProgress.current = Math.min(window.scrollY / (window.innerHeight * 1.2), 1);
+    };
+
     const handleScroll = () => {
-      if (!scrollContainer.current) return;
-      const scrollTop = scrollContainer.current.scrollTop;
+      const scrollTop = window.scrollY;
+      updateProgress();
       targetRotation.current = {
         x: scrollTop * -0.0006,
         y: scrollTop * -0.00075,
@@ -73,34 +82,26 @@ const SpacemanCanvas = ({ scrollContainer }) => {
     const handleMouseMove = (event) => {
       const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
       const mouseY = (event.clientY / window.innerHeight) * 2 - 1;
+      const scrollTop = window.scrollY;
 
-      if (scrollContainer.current) {
-        const scrollTop = scrollContainer.current.scrollTop;
-        targetRotation.current = {
-          x: scrollTop * -0.0006 + mouseY * 0.3,
-          y: scrollTop * -0.00075 + mouseX * 0.5,
-        };
-      }
+      targetRotation.current = {
+        x: scrollTop * -0.0006 + mouseY * 0.3,
+        y: scrollTop * -0.00075 + mouseX * 0.5,
+      };
     };
-
-    const container = scrollContainer.current;
 
     handleResize();
 
-    if (container) {
-      container.addEventListener("scroll", handleScroll);
-    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize);
     window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      if (container) {
-        container.removeEventListener("scroll", handleScroll);
-      }
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [scrollContainer]);
+  }, []);
 
   return (
     <Canvas
@@ -129,6 +130,7 @@ const SpacemanCanvas = ({ scrollContainer }) => {
 
         <Spaceman
           targetRotation={targetRotation}
+          scrollProgress={scrollProgress}
           scale={scale}
           position={position}
         />

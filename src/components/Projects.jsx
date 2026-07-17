@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import { projects } from "../data";
-import { SectionWrapper } from "../hoc";
 import { styles } from "../styles";
-import { gsap, ScrollTrigger } from "../utils/gsapUtils";
+import { gsap } from "../utils/gsapUtils";
+import Magnetic from "./Magnetic";
 
 const TiltCard = ({ children, className = "" }) => {
   const cardRef = useRef(null);
@@ -79,20 +79,21 @@ const AnimatedStat = ({ value, label }) => {
   );
 };
 
-const ProjectCard = ({ project, index }) => {
-  const isEven = index % 2 === 0;
-
+// One full-viewport panel in the horizontal showcase (stacks vertically on mobile)
+const ProjectPanel = ({ project, index, total }) => {
   return (
-    <motion.div
-      className="relative"
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
-    >
-      <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 lg:gap-16 items-center`}>
+    <div className="project-panel relative w-full lg:w-screen lg:h-screen shrink-0 flex items-center py-16 lg:py-0">
+      {/* Ghost index number */}
+      <span
+        aria-hidden="true"
+        className="hidden lg:block absolute top-16 right-16 text-[10rem] font-bold leading-none text-white/[0.03] font-display select-none"
+      >
+        0{index + 1}
+      </span>
+
+      <div className="container mx-auto px-6 sm:px-10 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         {/* Image with 3D tilt */}
-        <div className="w-full lg:w-1/2 relative">
+        <div className="relative">
           <TiltCard>
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-quaternary/20 to-cyan-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -101,10 +102,9 @@ const ProjectCard = ({ project, index }) => {
                 <img
                   src={project.image}
                   alt={project.name}
-                  className="w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full aspect-video object-cover object-top transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
-                {/* Live badge */}
                 <div className="absolute top-4 left-4 z-20 flex items-center gap-2 px-3 py-1.5 bg-black/60 backdrop-blur-md rounded-full border border-white/10">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                   <span className="text-xs text-white/80 font-medium">Live</span>
@@ -115,20 +115,22 @@ const ProjectCard = ({ project, index }) => {
         </div>
 
         {/* Content */}
-        <div className={`w-full lg:w-1/2 ${isEven ? 'lg:pl-4' : 'lg:pr-4'}`}>
+        <div>
+          <p className="text-white/30 text-xs font-mono mb-2 tracking-widest">
+            {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+          </p>
           <p className="text-quaternary text-xs font-mono mb-3 tracking-widest uppercase">
             {project.tagline}
           </p>
 
-          <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4 font-display tracking-tight">
+          <h3 className="text-3xl lg:text-5xl font-bold text-white mb-4 font-display tracking-tight">
             {project.name}
           </h3>
 
-          <p className="text-white/50 text-lg leading-relaxed mb-8">
+          <p className="text-white/50 text-lg leading-relaxed mb-8 max-w-xl">
             {project.description}
           </p>
 
-          {/* Stats with animated counters */}
           {project.stats && (
             <div className="flex flex-wrap gap-8 mb-8">
               {Object.entries(project.stats).map(([key, value]) => (
@@ -137,7 +139,6 @@ const ProjectCard = ({ project, index }) => {
             </div>
           )}
 
-          {/* Tech Stack */}
           <div className="flex flex-wrap gap-2 mb-8">
             {project.tech.map((tech) => (
               <span
@@ -149,33 +150,76 @@ const ProjectCard = ({ project, index }) => {
             ))}
           </div>
 
-          {/* CTA */}
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 px-7 py-3.5 bg-white text-primary font-semibold rounded-full transition-all duration-300 hover:shadow-xl hover:shadow-white/20 hover:scale-[1.03]"
-          >
-            <span>View Project</span>
-            <svg
-              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <Magnetic>
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 px-7 py-3.5 bg-white text-primary font-semibold rounded-full transition-shadow duration-300 hover:shadow-xl hover:shadow-white/20"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
+              <span>View Project</span>
+              <svg
+                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </Magnetic>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
 const Projects = () => {
   const sectionRef = useRef(null);
+  const pinRef = useRef(null);
+  const trackRef = useRef(null);
+  const progressRef = useRef(null);
+
+  const featuredProjects = projects.filter(p => p.featured);
+  const otherProjects = projects.filter(p => !p.featured);
 
   useEffect(() => {
+    const mm = gsap.matchMedia();
+
+    // Desktop: pin the showcase and scroll the track horizontally
+    mm.add("(min-width: 1024px)", () => {
+      const track = trackRef.current;
+      const pin = pinRef.current;
+      if (!track || !pin) return;
+
+      const getAmount = () => track.scrollWidth - window.innerWidth;
+
+      const tween = gsap.to(track, {
+        x: () => -getAmount(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: pin,
+          start: "top top",
+          end: () => "+=" + getAmount(),
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            if (progressRef.current) {
+              progressRef.current.style.transform = `scaleX(${self.progress})`;
+            }
+          },
+        },
+      });
+
+      return () => {
+        tween.scrollTrigger?.kill();
+        tween.kill();
+      };
+    });
+
+    // Header underline (all viewports)
     const ctx = gsap.context(() => {
       gsap.fromTo('.project-line',
         { scaleX: 0 },
@@ -192,49 +236,64 @@ const Projects = () => {
       );
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      mm.revert();
+      ctx.revert();
+    };
   }, []);
 
-  const featuredProjects = projects.filter(p => p.featured);
-  const otherProjects = projects.filter(p => !p.featured);
-
   return (
-    <div ref={sectionRef} className="relative py-24 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary via-[#081a2e] to-primary z-0" />
-
-      {/* Unique decoration for Projects — diagonal gradient */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-quaternary/[0.03] to-transparent z-0" />
-
-      <div className={`${styles.sectionContainer} relative z-10`}>
+    <section ref={sectionRef} className="relative">
+      <div className="relative z-10">
         {/* Header */}
-        <motion.div
-          className="max-w-3xl mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className={`${styles.sectionText} mb-6`}>
-            <span className="streaky-glow">Selected Work</span>
-          </h2>
-          <p className="text-white/40 text-xl font-light">
-            Products I've built that serve real users and solve real problems.
-          </p>
-          <div className="project-line h-px bg-gradient-to-r from-quaternary to-transparent mt-10 origin-left" />
-        </motion.div>
+        <div className={`${styles.sectionContainer} pt-24`}>
+          <motion.div
+            className="max-w-3xl"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className={`${styles.sectionText} mb-6`}>
+              <span className="streaky-glow">Selected Work</span>
+            </h2>
+            <p className="text-white/40 text-xl font-light">
+              Products I've built that serve real users and solve real problems.
+            </p>
+            <div className="project-line h-px bg-gradient-to-r from-quaternary to-transparent mt-10 origin-left" />
+          </motion.div>
+        </div>
 
-        {/* Featured Projects */}
-        <div className="space-y-36">
-          {featuredProjects.map((project, index) => (
-            <ProjectCard key={project.name} project={project} index={index} />
-          ))}
+        {/* Horizontal showcase — pinned on desktop, stacked on mobile */}
+        <div ref={pinRef} className="relative overflow-hidden">
+          <div
+            ref={trackRef}
+            className="flex flex-col gap-20 lg:gap-0 lg:flex-row lg:flex-nowrap will-change-transform py-8 lg:py-0"
+          >
+            {featuredProjects.map((project, index) => (
+              <ProjectPanel
+                key={project.name}
+                project={project}
+                index={index}
+                total={featuredProjects.length}
+              />
+            ))}
+          </div>
+
+          {/* Horizontal progress line (desktop only) */}
+          <div className="hidden lg:block absolute bottom-10 left-1/2 -translate-x-1/2 w-48 h-[2px] bg-white/10 rounded-full overflow-hidden">
+            <div
+              ref={progressRef}
+              className="h-full w-full bg-quaternary origin-left"
+              style={{ transform: 'scaleX(0)' }}
+            />
+          </div>
         </div>
 
         {/* Other Projects - Grid */}
         {otherProjects.length > 0 && (
           <motion.div
-            className="mt-36"
+            className={`${styles.sectionContainer} pt-24 pb-24`}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -276,8 +335,8 @@ const Projects = () => {
           </motion.div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 
-export default SectionWrapper(Projects, "projects");
+export default Projects;

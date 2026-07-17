@@ -50,7 +50,6 @@ const Certifications = () => {
   const visibleCerts = showAll ? certs : certs.slice(0, 4);
 
   useEffect(() => {
-    const wrapperEl = document.querySelector('.wrapper');
     const ctx = gsap.context(() => {
       // Title scroll reveal
       gsap.fromTo('.cert-title',
@@ -63,7 +62,6 @@ const Certifications = () => {
             start: 'top 80%',
             end: 'top 50%',
             scrub: 1,
-            scroller: wrapperEl,
           }
         }
       );
@@ -82,7 +80,6 @@ const Certifications = () => {
             start: 'top 85%',
             end: 'top 40%',
             scrub: 1,
-            scroller: wrapperEl,
           }
         }
       );
@@ -98,7 +95,6 @@ const Certifications = () => {
             start: 'top 70%',
             end: 'top 35%',
             scrub: 1,
-            scroller: wrapperEl,
           }
         }
       );
@@ -109,9 +105,6 @@ const Certifications = () => {
 
   return (
     <div className="relative py-20" ref={sectionRef}>
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary via-[#0a1628] to-primary z-0" />
-
       {/* Decorative blur */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-quaternary/5 rounded-full blur-[150px]" />
 
