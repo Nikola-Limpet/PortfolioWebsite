@@ -4,6 +4,10 @@ export default defineConfig({
   testDir: "./tests",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
+  // Hosted runners render WebGL in software. Initial shader compilation can
+  // exceed Playwright's five-second assertion default under parallel load.
+  timeout: process.env.CI ? 60_000 : 30_000,
+  expect: { timeout: process.env.CI ? 15_000 : 5_000 },
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 2 : 3,
   reporter: "list",
