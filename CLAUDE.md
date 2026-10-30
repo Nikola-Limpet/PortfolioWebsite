@@ -1,11 +1,11 @@
 # Project guidance
 
-Use `pnpm dev`, `pnpm build`, and `pnpm preview` for the Vite application.
+Use `corepack pnpm dev`, `corepack pnpm build`, and `corepack pnpm test` for the Vite/React application. Node.js 22.12+ is required.
 
-React 18 renders the portfolio. Three.js and React Three Fiber render an lazy-loaded continuous scroll journey. Manrope is self-hosted through Fontsource. CSS and IntersectionObserver handle page transitions; there is no smooth-scroll hijacking or global animation framework.
+This is a sculptural studio portfolio. `src/App.jsx` composes semantic page sections. `src/data/index.js` owns factual project and experience records. `src/index.css` owns the responsive ivory, charcoal, and vermilion design.
 
-Page composition is in `src/App.jsx`; reusable interactive components are in `src/components`. `src/data/index.js` owns portfolio records, and `src/index.css` owns the design tokens and responsive layouts. `src/hooks/useMotionPreference.js` tracks the system preference.
+`Studio.jsx` dynamically imports `src/lib/sculpture.js`. Keep continuous animation outside React state. Preserve pause, reduced motion, hidden-tab, offscreen, touch-scroll, keyboard, and WebGL fallback behavior. Dispose Three.js resources and all observers/listeners on unmount.
 
-Keep continuous animation values out of React state. Preserve the scene's hidden-tab, pause, reduced-motion, and WebGL-failure behavior. Use optimized assets in `public/space` and `public/projects`. Original unused assets remain available in `src/assets`.
+Project dialogs use native `<dialog>` with focus restoration. Preserve keyboard access and mobile layouts. Keep real project images in `public/projects`.
 
-The contact form uses the existing EmailJS service. Do not send real messages while testing unless specifically authorized. See README.md for asset regeneration and verification notes.
+Contact uses the existing EmailJS service. Never send real messages during automated tests; intercept the EmailJS endpoint. `tests/portfolio.spec.js` covers desktop/mobile functionality and axe accessibility. See README.md for commands.

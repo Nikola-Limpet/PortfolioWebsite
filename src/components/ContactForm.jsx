@@ -2,34 +2,38 @@ import { useRef, useState } from "react";
 import { FiArrowUpRight, FiCheck } from "react-icons/fi";
 
 export default function ContactForm() {
-  const form = useRef();
+  const form = useRef(null);
+  const busy = useRef(false);
   const [status, setStatus] = useState("idle");
   async function submit(event) {
     event.preventDefault();
-    if (status === "sending") return;
+    if (busy.current) return;
+    const values = Object.fromEntries(new FormData(form.current));
+    busy.current = true;
     setStatus("sending");
     try {
       const { default: emailjs } = await import("@emailjs/browser");
-      await emailjs.sendForm(
+      await emailjs.send(
         "service_y05449t",
         "template_pnydubb",
-        form.current,
+        values,
         "uXZDSOg9k6lvVXtO0",
       );
-      setStatus("sent");
       form.current.reset();
+      setStatus("sent");
     } catch {
       setStatus("error");
+    } finally {
+      busy.current = false;
     }
   }
   return (
     <form
-      ref={form}
       className="contact-form"
+      ref={form}
       onSubmit={submit}
       aria-busy={status === "sending"}
     >
-      <h3>Tell me about your idea.</h3>
       <div className="form-row">
         <label htmlFor="contact-name">
           Your name
@@ -37,9 +41,10 @@ export default function ContactForm() {
             id="contact-name"
             name="name"
             autoComplete="name"
-            placeholder="Alex"
+            placeholder="How should I call you?"
             required
             maxLength={120}
+            disabled={status === "sending"}
           />
         </label>
         <label htmlFor="contact-email">
@@ -49,35 +54,40 @@ export default function ContactForm() {
             name="email"
             type="email"
             autoComplete="email"
-            placeholder="alex@company.com"
+            placeholder="you@company.com"
             required
             maxLength={254}
+            disabled={status === "sending"}
           />
         </label>
       </div>
       <label htmlFor="contact-message">
-        What are you working on?
+        Your project
         <textarea
           id="contact-message"
           name="message"
           rows={4}
-          placeholder="A little about your project, timeline, or idea…"
+          placeholder="Tell me a little about what you have in mind…"
           required
           maxLength={5000}
+          disabled={status === "sending"}
         />
       </label>
-      <div aria-live="polite" className={`form-status ${status}`}>
+      <div className={`form-status ${status}`} role="status">
         {status === "sent" && (
           <p>
-            <FiCheck /> Message sent. Thanks for getting in touch!
+            <FiCheck /> Message sent. I’ll be in touch soon.
           </p>
         )}
         {status === "error" && (
-          <p>That didn’t send. Please try again or email me directly.</p>
+          <p>
+            Your message could not be sent. Try again or{" "}
+            <a href="mailto:al9725755@gmail.com">email me directly</a>.
+          </p>
         )}
       </div>
       <button
-        className="button button-primary"
+        className="button button-dark"
         type="submit"
         disabled={status === "sending"}
       >
