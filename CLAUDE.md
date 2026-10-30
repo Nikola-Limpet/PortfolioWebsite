@@ -1,54 +1,11 @@
-# CLAUDE.md
+# Project guidance
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Use `corepack pnpm dev`, `corepack pnpm build`, and `corepack pnpm test` for the Vite/React application. Node.js 22.12+ is required.
 
-## Build Commands
+This is a sculptural studio portfolio. `src/App.jsx` composes semantic page sections. `src/data/index.js` owns factual project and experience records. `src/index.css` owns the responsive ivory, charcoal, and vermilion design.
 
-```bash
-npm run dev      # Start development server (Vite)
-npm run build    # Production build
-npm run preview  # Preview production build locally
-```
+`Studio.jsx` dynamically imports `src/lib/sculpture.js`. Keep continuous animation outside React state. Preserve pause, reduced motion, hidden-tab, offscreen, touch-scroll, keyboard, and WebGL fallback behavior. Dispose Three.js resources and all observers/listeners on unmount.
 
-## Architecture Overview
+Project dialogs use native `<dialog>` with focus restoration. Preserve keyboard access and mobile layouts. Keep real project images in `public/projects`.
 
-This is a React portfolio website built with Vite, featuring 3D graphics and scroll-based animations.
-
-### Tech Stack
-- **React 18** with Vite
-- **Tailwind CSS** for styling
-- **Three.js** via @react-three/fiber and @react-three/drei for 3D graphics
-- **Framer Motion** and **GSAP** for animations
-- **EmailJS** for contact form
-
-### Project Structure
-
-```
-src/
-├── components/     # React components for each section (Hero, Projects, Skills, etc.)
-├── hoc/            # SectionWrapper HOC for animation wrapping
-├── data/           # Static content (navLinks, projects, certs, experiences)
-├── assets/         # Images, logos, 3D models (.glb files in assets/3d/)
-├── utils/          # motion.js - reusable Framer Motion animation variants
-├── App.jsx         # Main app orchestrating all sections
-├── styles.js       # Global styled component classes
-└── index.css       # Tailwind directives and global styles
-```
-
-### Key Patterns
-
-- **Section-based Layout**: App.jsx composes major sections (Hero, Projects, Certifications, Skills, Experience, Contact)
-- **HOC for Animations**: `SectionWrapper` wraps components with Framer Motion viewport detection
-- **Centralized Data**: All content arrays (projects, experiences, certs) live in `src/data/index.js`
-- **Motion Utilities**: Reusable animation variants (textVariant, fadeIn, slideIn, zoomIn) in `src/utils/motion.js`
-
-### 3D Integration
-
-The Spaceman component (`src/components/Spaceman.jsx`) renders a 3D model that responds to scroll position. Uses React Three Fiber with custom lighting setup. 3D models are stored as `.glb` files in `src/assets/3d/`.
-
-### Custom Tailwind Theme
-
-Extended in `tailwind.config.cjs` with:
-- Custom colors: primary (#011825), secondary (#F0EFEB), tertiary (#0D3056), quaternary (#1689C8)
-- Custom breakpoints: xs (450px), 3xl (2160px)
-- Custom animations: textRotate1, textRotate2
+Contact uses the existing EmailJS service. Never send real messages during automated tests; intercept the EmailJS endpoint. `tests/portfolio.spec.js` covers desktop/mobile functionality and axe accessibility. See README.md for commands.

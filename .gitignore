@@ -27,3 +27,6 @@ dist-ssr
 
 # vscode
 .vscode
+# Browser test artifacts
+playwright-report/
+test-results/
