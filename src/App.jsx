@@ -39,6 +39,12 @@ function CopyEmail() {
 }
 
 export default function App() {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const projectTrigger = useRef(null);
+  function openProject(project, event) {
+    projectTrigger.current = event.currentTarget;
+    setSelectedProject(project);
+  }
   return (
     <>
       <a className="skip-link" href="#main">
@@ -59,20 +65,22 @@ export default function App() {
               <em>real things.</em>
             </h1>
             <p className="hero-description">
-              I’m Nikola. I build thoughtful digital products that make everyday
-              life a little better.
+              I’m Nikola Limpet, a full stack developer in Cambodia. I build
+              useful platforms for education, communities, and everyday
+              business.
             </p>
             <a className="button button-dark" href="#projects">
               Discover my work <FiArrowDown />
             </a>
           </div>
-          <Studio />
-          <div className="hero-footnote">
-            <span>Code with purpose. Design with feeling.</span>
-            <span>Independent developer, based in Cambodia.</span>
-          </div>
+          <Studio onOpenProject={openProject} />
         </section>
-        <Work />
+        <Work
+          selected={selectedProject}
+          onSelect={openProject}
+          onClose={() => setSelectedProject(null)}
+          trigger={projectTrigger}
+        />
         <section
           className="about section-shell"
           id="about"

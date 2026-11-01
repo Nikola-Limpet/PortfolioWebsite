@@ -2,11 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { FiArrowUpRight, FiArrowRight, FiX } from "react-icons/fi";
 import { projects } from "../data";
 
-export default function Work() {
+export default function Work({ selected, onSelect, onClose, trigger }) {
   const [filter, setFilter] = useState("All work");
-  const [selected, setSelected] = useState(null);
   const dialog = useRef(null);
-  const trigger = useRef(null);
   const visible = projects.filter(
     (project) => filter === "All work" || project.category === filter,
   );
@@ -22,14 +20,13 @@ export default function Work() {
       document.body.style.overflow = previous;
       trigger.current?.focus({ preventScroll: true });
     };
-  }, [selected]);
+  }, [selected, trigger]);
 
   function close() {
-    setSelected(null);
+    onClose();
   }
   function open(project, event) {
-    trigger.current = event.currentTarget;
-    setSelected(project);
+    onSelect(project, event);
   }
 
   return (
@@ -43,7 +40,6 @@ export default function Work() {
           <p className="section-kicker">Made to make a difference</p>
           <h2 id="work-title">
             Selected <em>work</em>
-            <sup>04</sup>
           </h2>
         </div>
         <div className="work-filters" role="group" aria-label="Filter projects">
@@ -70,19 +66,13 @@ export default function Work() {
               aria-label={`Explore ${project.name}`}
             >
               <div className="project-browser">
-                <div className="browser-bar" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                  <span className="browser-address">{project.domain}</span>
-                </div>
                 <img
                   src={project.image}
                   srcSet={`${project.image.replace(".webp", "-small.webp")} 600w, ${project.image} 1400w`}
                   sizes="(max-width: 700px) 85vw, 45vw"
                   alt={`${project.name} website preview`}
-                  width="1400"
-                  height="950"
+                  width="1280"
+                  height="720"
                   loading="lazy"
                 />
               </div>
@@ -104,6 +94,14 @@ export default function Work() {
                   ? "Website"
                   : "Web application"}
               </span>
+            </div>
+            <div className="project-actions">
+              <button onClick={(event) => open(project, event)}>
+                Project details <FiArrowRight />
+              </button>
+              <a href={project.url} target="_blank" rel="noreferrer">
+                Live site <FiArrowUpRight />
+              </a>
             </div>
           </article>
         ))}
