@@ -41,7 +41,7 @@ export default function ContactForm() {
             id="contact-name"
             name="name"
             autoComplete="name"
-            placeholder="How should I call you?"
+            placeholder="Your full name"
             required
             maxLength={120}
             disabled={status === "sending"}

@@ -19,8 +19,8 @@ export function createSculpture(canvas, onContextLost) {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 60);
-  camera.position.set(6.5, 4.2, 8.8);
-  camera.lookAt(0, 1.35, 0);
+  camera.position.set(3.0, 3.0, 8.4);
+  camera.lookAt(0, 1.75, 0);
   const pmrem = new THREE.PMREMGenerator(renderer);
   const room = new RoomEnvironment();
   const environment = pmrem.fromScene(room, 0.04);
@@ -43,11 +43,6 @@ export function createSculpture(canvas, onContextLost) {
     clearcoat: 0.35,
     envMapIntensity: 0.55,
   });
-  const chrome = new THREE.MeshStandardMaterial({
-    color: "#ededed",
-    metalness: 1,
-    roughness: 0.14,
-  });
   const charcoal = new THREE.MeshStandardMaterial({
     color: "#252a28",
     roughness: 0.28,
@@ -69,45 +64,68 @@ export function createSculpture(canvas, onContextLost) {
     [0, 0.125, 0],
   );
   plinth.receiveShadow = true;
-  const arch = new THREE.Shape();
-  arch.moveTo(-1.22, 0);
-  arch.lineTo(-1.22, 1.46);
-  arch.absarc(0, 1.46, 1.22, Math.PI, 0, true);
-  arch.lineTo(1.22, 0);
-  arch.lineTo(0.56, 0);
-  arch.lineTo(0.56, 1.46);
-  arch.absarc(0, 1.46, 0.56, 0, Math.PI, false);
-  arch.lineTo(-0.56, 0);
-  arch.closePath();
-  const archGeometry = new THREE.ExtrudeGeometry(arch, {
-    depth: 0.68,
-    bevelEnabled: true,
-    bevelSegments: 5,
-    steps: 1,
-    bevelSize: 0.08,
-    bevelThickness: 0.08,
-    curveSegments: 40,
+  // A real product screen is the centerpiece, rather than unrelated sculpture.
+  const display = new THREE.Group();
+  display.position.set(0, 2.05, 0);
+  assembly.add(display);
+  const shell = mesh(
+    new THREE.BoxGeometry(4.25, 2.55, 0.15),
+    charcoal,
+    [0, 0, 0],
+    display,
+  );
+  shell.castShadow = true;
+  const screenMaterial = new THREE.MeshBasicMaterial({
+    color: "#ffffff",
+    toneMapped: false,
   });
-  const archMesh = mesh(archGeometry, orange, [-0.55, 0.34, -0.45]);
-  archMesh.rotation.y = -0.16;
-  const ring = mesh(
-    new THREE.TorusGeometry(0.83, 0.225, 32, 100),
-    chrome,
-    [1.08, 2.4, 0.2],
+  mesh(
+    new THREE.PlaneGeometry(4.03, 2.267),
+    screenMaterial,
+    [0, 0.025, 0.081],
+    display,
   );
-  ring.rotation.set(0.45, 0.45, -0.4);
-  mesh(new THREE.SphereGeometry(0.48, 40, 32), charcoal, [1.13, 0.73, 0.7]);
-  const pearl = mesh(
-    new THREE.SphereGeometry(0.25, 32, 24),
-    porcelain,
-    [-0.7, 3.35, -0.1],
-  );
-  const smallRing = mesh(
-    new THREE.TorusGeometry(0.36, 0.09, 20, 60),
-    orange,
-    [-1.25, 0.35, 1.0],
-  );
-  smallRing.rotation.x = Math.PI / 2;
+  mesh(new THREE.CylinderGeometry(0.12, 0.16, 0.7, 32), orange, [0, 0.66, 0]);
+  mesh(new THREE.BoxGeometry(1.4, 0.1, 0.75), charcoal, [0, 0.32, 0.05]);
+  const textures = new Map();
+  const pendingTextures = new Map();
+  let currentImage;
+  function setProject(image) {
+    currentImage = image;
+    function apply(texture) {
+      if (!texture || disposed || image !== currentImage) return false;
+      screenMaterial.map = texture;
+      screenMaterial.needsUpdate = true;
+      render();
+      return true;
+    }
+    if (textures.has(image)) return Promise.resolve(apply(textures.get(image)));
+    if (!pendingTextures.has(image)) {
+      const request = new THREE.TextureLoader()
+        .loadAsync(image)
+        .then((texture) => {
+          pendingTextures.delete(image);
+          if (disposed) {
+            texture.dispose();
+            return null;
+          }
+          texture.encoding = THREE.sRGBEncoding;
+          texture.anisotropy = Math.min(
+            4,
+            renderer.capabilities.getMaxAnisotropy(),
+          );
+          textures.set(image, texture);
+          return texture;
+        })
+        .catch(() => {
+          pendingTextures.delete(image);
+          if (!disposed && image === currentImage) onContextLost();
+          return null;
+        });
+      pendingTextures.set(image, request);
+    }
+    return pendingTextures.get(image).then(apply);
+  }
 
   const floor = mesh(
     new THREE.PlaneGeometry(200, 200),
@@ -160,14 +178,12 @@ export function createSculpture(canvas, onContextLost) {
     if (delta >= 1 / 32 || !previousTime) {
       elapsed += delta;
       previousTime = time;
-      if (pointer === null) targetRotation += delta * 0.035;
       assembly.rotation.y = THREE.MathUtils.lerp(
         assembly.rotation.y,
-        targetRotation,
+        targetRotation +
+          (pointer === null ? Math.sin(elapsed * 0.5) * 0.035 : 0),
         0.14,
       );
-      ring.position.y = 2.4 + Math.sin(elapsed * 0.7) * 0.075;
-      pearl.position.y = 3.35 + Math.sin(elapsed * 0.8 + 1) * 0.09;
       render();
     }
     frame = requestAnimationFrame(tick);
@@ -184,12 +200,12 @@ export function createSculpture(canvas, onContextLost) {
     if (!width || !height || disposed || lost) return;
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
-    camera.fov = width < height * 0.9 ? 42 : 35;
+    camera.fov = width < height * 0.9 ? 38 : 30;
     camera.updateProjectionMatrix();
     render();
   }
   function rotate(amount) {
-    targetRotation += amount;
+    targetRotation = THREE.MathUtils.clamp(targetRotation + amount, -0.7, 0.7);
     assembly.rotation.y = targetRotation;
     render();
   }
@@ -244,6 +260,12 @@ export function createSculpture(canvas, onContextLost) {
 
   return {
     rotate,
+    setProject,
+    reset() {
+      targetRotation = -0.2;
+      assembly.rotation.y = targetRotation;
+      render();
+    },
     setPaused(value) {
       paused = value;
       schedule();
@@ -267,6 +289,7 @@ export function createSculpture(canvas, onContextLost) {
       });
       geometries.forEach((geometry) => geometry.dispose());
       materials.forEach((material) => material.dispose());
+      textures.forEach((texture) => texture.dispose());
       environment.dispose();
       light.shadow.dispose();
       renderer.dispose();

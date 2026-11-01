@@ -257,3 +257,45 @@ test("page and project dialog pass accessibility checks", async ({ page }) => {
     .analyze();
   expect(dialogAudit.violations).toEqual([]);
 });
+
+test("3D viewer browses real projects and opens the selected case study", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const viewer = page.getByRole("region", {
+    name: "Interactive project viewer",
+  });
+  await expect(
+    viewer.getByRole("heading", { name: "JoulHub", exact: true }),
+  ).toBeVisible();
+  await viewer.getByRole("button", { name: "Next project" }).click();
+  await expect(
+    viewer.getByRole("heading", { name: "Smart Education", exact: true }),
+  ).toBeVisible();
+  await viewer.getByRole("button", { name: "View project details" }).click();
+  await expect(
+    page.getByRole("dialog").getByRole("heading", { name: "Smart Education" }),
+  ).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(
+    viewer.getByRole("button", { name: "View project details" }),
+  ).toBeFocused();
+  await viewer.getByRole("button", { name: "Previous project" }).click();
+  await expect(
+    viewer.getByRole("heading", { name: "JoulHub", exact: true }),
+  ).toBeVisible();
+  await viewer.getByRole("button", { name: "Reset view" }).click();
+});
+
+test("project cards expose a direct live link and details action", async ({
+  page,
+}) => {
+  await page.goto("/#projects");
+  const card = page.locator(".project-card").first();
+  await expect(card.getByRole("link", { name: "Live site" })).toHaveAttribute(
+    "href",
+    "https://joulhub.com",
+  );
+  await card.getByRole("button", { name: "Project details" }).click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+});
