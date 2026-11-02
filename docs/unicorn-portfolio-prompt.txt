@@ -1,0 +1,39 @@
+Redesign Nikola Limpet's portfolio from scratch and create its original animated hero in Unicorn Studio.
+
+Work in /home/yuujin/personal/portfolio/PortfolioWebsite. The user has authorized the redesign and connected the unicorn-studio MCP server through OAuth. First confirm the MCP tools are available and that an editor project is connected with Allow agents enabled. Never claim the scene was created or published without a successful tool result.
+
+SOURCE CONSTRAINT
+Use the current repository only for factual text, project information, links, contact details, and necessary application behavior. Do not use the current UI, screenshots, layout, component styling, artwork, or visual composition as design inspiration. Create a new visual system and page composition. You may rewrite text for clarity while preserving facts. Do not invent metrics, employers, testimonials, availability, or qualifications.
+
+COLOR REFERENCE
+Use the user's supplied image as the color direction: sky blue #0593C6, white #FCFFFF, and hot pink #D83095. These hex values are transcribed from the screenshot and can be checked against the attachment. A deep blue ink may support legible text. Blue should dominate the hero; pink is a deliberate focal accent; white supplies light and breathing room.
+Reference attachment: /home/yuujin/.t3/userdata/attachments/967820a2-057b-4ff7-acb5-cec6cb0fbc01-f633298b-30fa-4674-b47f-b26014b3d879.png
+The attached website is a mood reference, not a layout to copy. Do not reproduce its health product, dashboard, navigation, or copy.
+
+UNICORN STUDIO SCENE PROMPT
+Create a new scene named "Nikola / Refraction" for a full-width portfolio hero. Design an original abstract composition of broad, luminous blue and pink ribbons passing behind finely fluted glass. A sweeping diagonal form should loosely suggest the letter N without looking like a literal logo. Use sky blue as the main field, concentrated hot pink light toward the center-right, and restrained white highlights. Keep the left lower third visually quiet so HTML text remains readable. Give the scene real visual depth through refraction, thin vertical optical ridges, soft light diffusion, and delicate grain. Avoid stock gradient blobs, a particle starfield, dashboard elements, preset neon grids, and Neon.com's green bar composition.
+
+Animate the light with slow, continuous movement. Pointer movement may gently shift the refraction; avoid aggressive distortion, flashing, or scroll hijacking. Make the composition work at desktop, tablet, and narrow mobile widths. Keep the effect lightweight. Leave all headline text, navigation, and buttons outside the WebGL scene so they remain semantic, selectable, and keyboard accessible.
+
+Use the connected Unicorn tools to inspect the editor, create the scene, validate/render shader changes, inspect the result, and commit the finished changes. Follow the tools' actual schemas and preview workflow. Obtain the real publish/embed configuration for this scene and integrate it into the portfolio. Never fabricate scene IDs or export URLs. If publishing requires an unavailable plan or a payment, report that constraint without buying anything. Retain a matching static fallback for reduced motion, unavailable WebGL, and load errors.
+
+FULL PORTFOLIO DIRECTION
+Build the surrounding site in the existing React/Vite project. The design proposal is an expressive, editorial portfolio with a large immersive color hero, strong typography, and spacious white project sections. Establish a fresh wordmark, navigation, spacing, type hierarchy, project presentation, about section, experience, and contact area. Avoid a generic collection of rounded cards and repeated feature grids.
+
+Suggested opening copy:
+"Thoughtful interfaces. Useful products."
+"I'm Nikola Limpet, a full stack developer and founder in Cambodia. I build platforms for education, communities, and everyday business."
+Primary action: "Explore my work". Secondary action: "Let's talk".
+This copy is a proposal and may be refined without changing the factual claims.
+
+Present the four projects through distinctive typographic case-study compositions using their names, descriptions, technologies, metrics, and real links from src/data/index.js. The user permits only text from the existing site; do not reuse its project screenshots or artwork. Use fresh abstract graphic treatments based on each project's subject. Keep detailed information accessible through working project links or an accessible detail interaction.
+
+Preserve factual content for JoulHub, Smart Education, MLC International School, AUPP Alumni Connect, the JoulHub founder role, CIMOC co-founder role, AUPP React workshop, certifications, and the toolkit. Read src/data/index.js for exact current details and URLs. Existing dates and metrics are user-supplied portfolio claims, not independently verified data.
+
+Contact email: al9725755@gmail.com.
+Social URLs are in src/data/index.js. Preserve valid contact behavior and email fallback without exposing configuration secrets. Do not put implementation notes or setup instructions into the public-facing page.
+
+IMPLEMENTATION AND VALIDATION
+Use semantic HTML and responsive layout with visible keyboard focus, readable contrast, reduced-motion support, and no horizontal overflow. Make the navigation, project interactions, contact actions, and mobile menu work. Clean up the Unicorn runtime on component unmount and avoid duplicate scene initialization. Pause or avoid unnecessary animation when appropriate. Do not let a failed scene block access to the portfolio.
+
+Check the repository's scripts and existing tests. Run the production build and relevant functional/accessibility checks; update tests that genuinely depend on the replaced UI. Do not use old site screenshots as a design reference. Do not open browser previews unless the user asks for browser work. Report exactly what was created in Unicorn, which scene was integrated, what changed locally, what was tested, and any remaining limitations. Do not deploy the entire website or buy a plan without authorization.

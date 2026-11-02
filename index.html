@@ -3,8 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link
+      rel="preload"
+      as="image"
+      href="/artwork/hero.webp"
+      imagesrcset="/artwork/hero-small.webp 768w, /artwork/hero.webp 1536w"
+      imagesizes="(max-width: 760px) 100vw, 50vw"
+      fetchpriority="high"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f5f3ed" />
+    <meta name="theme-color" content="#fcffff" />
     <meta
       name="description"
       content="Nikola Limpet is a full stack developer and team lead in Cambodia, building platforms for education, property management, and real-world businesses."
