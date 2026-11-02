@@ -23,9 +23,6 @@ importers:
       react-icons:
         specifier: ^5.7.0
         version: 5.7.0(react@18.3.1)
-      three:
-        specifier: ^0.149.0
-        version: 0.149.0
     devDependencies:
       '@axe-core/playwright':
         specifier: ^4.14.0
@@ -658,9 +655,6 @@ packages:
     resolution: {integrity: sha512-KGj/8Y43x35aZVDtt+J4mK1hoLGHULMYfSkODJNQjNDC3oW1PqPoxMwo0pLUsWM/UEGzON/NxeHywEfNXNP3Vw==}
     engines: {node: '>=0.10.0'}
 
-  three@0.149.0:
-    resolution: {integrity: sha512-tohpUxPDht0qExRLDTM8sjRLc5d9STURNrdnK3w9A+V4pxaTBfKWWT/IqtiLfg23Vfc3Z+ImNfvRw1/0CtxrkQ==}
-
   tinyglobby@0.2.17:
     resolution: {integrity: sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==}
     engines: {node: '>=12.0.0'}
@@ -1221,8 +1215,6 @@ snapshots:
   semver@6.3.1: {}
 
   source-map-js@1.2.2: {}
-
-  three@0.149.0: {}
 
   tinyglobby@0.2.17:
     dependencies:

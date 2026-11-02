@@ -1,70 +1,75 @@
 import { useEffect, useRef, useState } from "react";
 import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
 
-const links = [
-  ["projects", "Work"],
-  ["about", "About"],
-  ["experience", "Experience"],
-];
+export function Monogram() {
+  return (
+    <svg viewBox="0 0 36 36" fill="none" aria-hidden="true">
+      <path
+        d="M5 30V6h6l14 24h6V6"
+        stroke="currentColor"
+        strokeWidth="4"
+        strokeLinejoin="round"
+      />
+      <path d="M5 30 31 6" stroke="currentColor" strokeWidth="1" opacity=".5" />
+    </svg>
+  );
+}
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const toggle = useRef(null);
-  const nav = useRef(null);
   useEffect(() => {
     if (!open) return;
-    const close = (event) => {
+    const closeOnEscape = (event) => {
       if (event.key === "Escape") {
         setOpen(false);
         toggle.current?.focus();
       }
     };
-    const outside = (event) => {
-      if (!nav.current?.contains(event.target)) setOpen(false);
-    };
-    document.addEventListener("keydown", close);
-    document.addEventListener("pointerdown", outside);
-    return () => {
-      document.removeEventListener("keydown", close);
-      document.removeEventListener("pointerdown", outside);
-    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
   }, [open]);
   return (
-    <header className="header section-shell" ref={nav}>
+    <header className={`site-header ${open ? "menu-open" : ""}`}>
       <a
-        href="#hero"
-        className="wordmark"
-        aria-label="Nikola, home"
+        className="brand"
+        href="#home"
+        aria-label="Nikola Limpet, home"
         onClick={() => setOpen(false)}
       >
-        nikola<span>.</span>
+        <Monogram />
+        <span>
+          nikola<span className="brand-dot">.</span>
+        </span>
       </a>
       <button
-        ref={toggle}
         className="menu-toggle"
-        onClick={() => setOpen((value) => !value)}
+        type="button"
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         aria-controls="main-navigation"
+        onClick={() => setOpen(!open)}
+        ref={toggle}
       >
-        {open ? <FiX /> : <FiMenu />}
+        {open ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
       </button>
       <nav
         id="main-navigation"
-        className={open ? "navigation is-open" : "navigation"}
         aria-label="Main navigation"
+        className={open ? "is-open" : ""}
       >
-        {links.map(([id, label]) => (
-          <a href={`#${id}`} key={id} onClick={() => setOpen(false)}>
-            {label}
-          </a>
-        ))}
+        <a href="#projects" onClick={() => setOpen(false)}>
+          Work <span>04</span>
+        </a>
+        <a href="#about" onClick={() => setOpen(false)}>
+          About
+        </a>
         <a
           className="nav-contact"
           href="#contact"
           onClick={() => setOpen(false)}
         >
-          Let’s talk <FiArrowUpRight />
+          Let's talk <FiArrowUpRight aria-hidden="true" />
         </a>
       </nav>
     </header>
